@@ -1,8 +1,7 @@
 # Saikyou
-=============
 
 ## Objective: ##
----------------
+
 *creative/ achievable project plan
     *Adjust it as opportunity and roadblocks arise
 *Evaluate / compare diff tech/services for use in a project
