@@ -26,7 +26,6 @@ In Saikyou, users will be able to:
 	- Data of each year can be fetched without making a backend
 - Switch between top 3 manga and top 3 anime without leaving page
 - No off sync ability, but be able to fetch data from related sites based on id
-	- <Be able to sync off of MyAnimeList using fetch>
 - Be able to look at a specific year based on a drop done
 
 In addition, this project will include:
