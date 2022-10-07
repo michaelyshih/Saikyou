@@ -14,9 +14,9 @@
 ## Overview: ##
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyAnimeList is a very extensive encyclopedia and forum that allows users to look up anime with many sorting options, but they do not have a section to show the most popular shows (based on members watching) of each year. This project is an attempt to display the top 3 popular anime, manga, anime music of each year for the last 5years.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyAnimeList is a very extensive encyclopedia and forum that allows users to look up anime with many sorting options, but they do not have a section to show the most popular shows (based on members watching) of each year. This project is an attempt to display the top 3 popular anime, manga, anime music of each year for the last 5 years.
 <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The project allows you to scroll through a timeline in 3d space following a path of the 5 years and look at the most popular anime / manga/ music of that year. There is a drop down that allows you to quickly access a year that you’re interested in. When clicked, the item you picked will display the information of the year with links and details to external sites where you could explore more.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The project allows you to scroll through a timeline in 3d space following a path of the 5 years and look at the most popular anime / manga/ music of that year. You could select year by scrolling or by selecting them. When clicked, the item you picked will display the information of the year with links and details to external sites where you could explore more.
 <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Bonus: perspective on the background to display to traverse 3d space and view the animation as floating boxes in 3 dimensional space
 
@@ -24,21 +24,14 @@
 
 
 In Saikyou, users will be able to:
-- Browse top 3 anime of the past 10 years
-	- Data of each year can be fetched without making a backend
-- Switch between top 3 manga and top 3 anime
-- No off sync ability, but be able to fetch data from related sites based on id
-- Be able to look at a specific year based on a drop done
-- Zoomed in ver of anime and manga have links to where
+- Browse top 3 anime of the past 5 years in timeline
+- navigating between top 3 manga/ top 3 anime/ top from nav bar
+- navigating to a specific year by scrolling or from selecting
+- when mesh is clicked, switch between webpage of details and 3D background with timeline
 
 In addition, this project will include:
-
-- trailer playing autmatically by default
-	- The video ele should increase in size
-	- Background should fade out
-	- Upon clicking into the video, the video should be able continue playing from where it’s currently playing at
-- Manga have hover expansion as well (full size zoom on click)
-- Have the first chapter as a read
+- ability to switch details of display body depending on the content selected
+- ability to see trailer playing when hovering over video
 
 ## Wireframes: ##
 - https://wireframe.cc/qo22RQ
@@ -46,8 +39,8 @@ In addition, this project will include:
 ## Technologies, Libraries, APIs: ##
 - three js for importing the scene
 - blender to create simple models if need to
-- jikan.js to fetch info from MyAnimeList into spreadsheet
--
+- jikan api to grab anime info
+- youtube API to gran music info
 
 ## Implementation Timeline: ##
 
@@ -65,17 +58,31 @@ In addition, this project will include:
 - Saturday
 	- morning
 	 	- have replicable mesh plates setup and in their proper places
-		- have 
+		- have the default webpage view of zoomed video and details setup
+	- afternoon
+		- work on getting the videos to be textured onto the mesh
 - Sunday
-	-
+	- morning
+		- have a textured mesh working and be able to replicate it to all mesh plates holding videos
+	- afternoon
+		- work on raycasting to have the mesh responds to handle click and unhide/ hide the zoomed display
 - Monday
-	-
+	- morning
+		- have the zoomed display change depending on where the click happened
+	- afternoon
+		- have the nav bar working to change camera from one time line to another
 - Tuesday
-	- finishing up, any attempt at bonus should be done here before this point.
+	- mornign
+		- have the timeline working to change the camera from one year plane to another year plane.
+	- finishing up, any attempt at bonus should be done here.
 - Wednesday
-	-make sure everything is hosted and working, confirm with TA and
+	- morning
+		- final attempts at the bouns
+	- afternoon
+		- make sure everything is hosted and working, confirm with TA and
 - Thursday
 	-
 ## Bonus Features (Optional): ##
- - having flip animation for the book meshes
- - having meshs for the music that can play on discs
+-
+- having flip animation for the book meshes
+- having meshs for the music that can play on discs

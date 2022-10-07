@@ -1,0 +1,27 @@
+.nav-bar{
+    background-color: wheat;
+}
+
+.body{
+    background-color: none;
+}
+
+.nav-bar{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    background-color: white;
+    opacity: .60;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}

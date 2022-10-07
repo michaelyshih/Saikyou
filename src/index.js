@@ -26,8 +26,8 @@ document.body.appendChild( renderer.domElement );
 function animate(){
     requestAnimationFrame(animate); // loop every time the scene is refreshed => 60 fps
 
-    // cube.rotation.x += 0.01; // rotation in speed per second
-    // cube.rotation.y += 0.01;
+    cube.rotation.x += 0.01; // rotation in speed per second
+    cube.rotation.y += 0.01;
 
     renderer.render(scene, camera)
 }
