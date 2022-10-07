@@ -27,7 +27,7 @@ In Saikyou, users will be able to:
 - Browse top 3 anime of the past 5 years in timeline
 - navigating between top 3 manga/ top 3 anime/ top from nav bar
 - navigating to a specific year by scrolling or from selecting
-- when mesh is clicked, switch between webpage of details and 3D background with timeline
+- switching back and forth webpage of details and 3D background with timeline
 
 In addition, this project will include:
 - ability to switch details of display body depending on the content selected
@@ -74,15 +74,16 @@ In addition, this project will include:
 - Tuesday
 	- mornign
 		- have the timeline working to change the camera from one year plane to another year plane.
-	- finishing up, any attempt at bonus should be done here.
+	- afternoon
+		- finishing up, any attempt at bonus should be done here.
 - Wednesday
 	- morning
-		- final attempts at the bouns
+		- final attempts at the bouns, or adding bloom/ effects to mesh
 	- afternoon
 		- make sure everything is hosted and working, confirm with TA and
 - Thursday
 	-
 ## Bonus Features (Optional): ##
--
+- having
 - having flip animation for the book meshes
 - having meshs for the music that can play on discs
