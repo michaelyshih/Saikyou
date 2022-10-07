@@ -1,27 +1,100 @@
-.nav-bar{
-    background-color: wheat;
+*{
+    list-style: none;
 }
 
-.body{
+body{
     background-color: none;
+    display: flex;
+
+
+    main{
+        display: flex;
+        z-index: 2;
+        section{
+            margin-top: 85px;
+            display: none;
+        }
+    }
+
+    canvas{
+        position:absolute;
+        z-index: -1;
+
+    }
 }
 
 .nav-bar{
-    margin-top: 50px;
-    width: 100%;
+    margin: 10px 25px;
     display: flex;
     position: fixed;
-    background-color: white;
-    opacity: .60;
+    left:0;
+    right:0;
+    opacity: .50;
     text-align: center;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    list-style: none;
+    z-index: 2;
+
+
+    ul{
+        display: flex;
+        justify-content:left;
+        align-items: center;
+        background-color: white;
+        padding: 5px 7px;
+        border-radius: 47%;
+
+        *{
+            padding: 5px 10px;
+        }
+    }
+
+    a, a:hover, a:focus, a:active{
+        text-decoration: none;
+    }
+
 }
 
-ul{
-    display: flex;
-    list-style: none;
-    justify-content: center;
-    align-items: center;
+.zoomed-video{
+    margin-left: -35px;
+}
+
+.zoomed-description {
+    margin-left: 20px;
+    color:white;
+
+    a, a:hover, a:focus, a:active{
+        text-decoration: none;
+        color: white;
+    }
+
+    h2{
+        margin-top:0px;
+        font-size: 30px;
+        text-align: center;
+        animation: glow 1s infinite alternate;
+        @keyframes glow{
+            from { // initial setting array
+                text-shadow: // setting the inital shadow offset(0,0) size and color
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 15px #ED535D,
+                0 0 20px #ED535D,
+                0 0 25px #ED535D,
+                0 0 30px #ED535D,
+                0 0 35px #ED535D;
+              }
+
+              to { // ending setting array
+                text-shadow:
+                0 0 10px #fff,
+                0 0 15px #C72E26,
+                0 0 20px #C72E26,
+                0 0 25px #C72E26,
+                0 0 30px #C72E26,
+                0 0 35px #C72E26,
+                0 0 40px #C72E26;
+              }
+        }
+    }
 }
