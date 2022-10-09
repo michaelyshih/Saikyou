@@ -1,6 +1,18 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
+import Papa from "papaparse";
+
+//csv-parser
+// let csvData = [];
+// Papa.parse("",{
+//     header:true,
+//     step:function(result){
+//         csvData.push(result.data)
+//     },
+//     complete: function(results,fele){
+//         console.log("Complete", csvData.length,"records.")
+//     }});
 
 
 //renderer
@@ -56,10 +68,15 @@ window.addEventListener("click", event=>{
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
 
     const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
+    const zoomedContent = document.getElementsByClassName("zoomed-content");
+    const zoomedDesc = document.getElementsByClassName("zoomed-description");
     if(intersects.length > 0 && intersects[0].object.userData.clickable){
         clicked = intersects[0].object;
         console.log(`found clickable ${clicked.userData.id}`) // return the clickable obj name debugging
-        const content = document.findElement
+
+        // console.log(zoomedContent[0].style);
+        // zoomedContent[0].style.display = "static";
+        // console.log(zoomedContent[0].style);
     }
 
 });
@@ -82,3 +99,5 @@ update();
 // adding panels
 // const groundGeo = new THREE.PlaneGeometry(100,100)
 // const groundMat = new THREE.MeshBasicMaterial({color: })
+
+//csv parser

@@ -30,6 +30,11 @@ const config = {
       }
     ]
   },
+  resolve: {
+    fallback: {
+      fs: false
+    }
+  },
   plugins: [new MiniCssExtractPlugin()]
 };
 
