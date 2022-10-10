@@ -14,27 +14,24 @@ export default class Timeline{
         for (let i = 18; i < 23; i++){
 
             for (let j= 1; j <= 3; j++){
-                let key = this.type + i + j;
-                // let prevKey = key + i + (j-1);
+                let panelID = this.type + i + j;
+                // let prevKey = panelID + i + (j-1);
                 const spread = 75
-                // console.log(key)
+                // console.log(panelID)
                 if (j === 1){
-                    this.panels[key] = new Panel("#3561F2", ...pos);
-                    this.panels[key].mesh.position.x += spread ;
-                    this.panels[key].mesh.userData.id = `${key}`;
-                    scene.add( this.panels[key].mesh ); // adding item to a scene
+                    this.panels[panelID] = new Panel( panelID, ...pos);
+                    this.panels[panelID].mesh.position.y += spread ;
+                    scene.add( this.panels[panelID].mesh ); // adding item to a scene
                 }
                 if (j === 2){
-                    this.panels[key] = new Panel("red", ...pos);
-                    this.panels[key].mesh.position.x -= spread ;
-                    this.panels[key].mesh.userData.id = `${key}`;
-                    scene.add( this.panels[key].mesh ); // adding item to a scene
+                    this.panels[panelID] = new Panel(panelID, ...pos);
+                    this.panels[panelID].mesh.position.x -= spread ;
+                    scene.add( this.panels[panelID].mesh ); // adding item to a scene
                 }
                 if (j === 3){
-                    this.panels[key] = new Panel("purple", ...pos);
-                    this.panels[key].mesh.position.y += spread ;
-                    this.panels[key].mesh.userData.id = `${key}`;
-                    scene.add( this.panels[key].mesh ); // adding item to a scene
+                    this.panels[panelID] = new Panel(panelID, ...pos);
+                    this.panels[panelID].mesh.position.x += spread ;
+                    scene.add( this.panels[panelID].mesh ); // adding item to a scene
                 }
 
             }

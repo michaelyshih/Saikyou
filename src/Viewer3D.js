@@ -8,16 +8,17 @@ export default class Viewer3D{
         this.scene.background = new THREE.Color("#95DFFC") // sets the scene's background color
         this.timelines = [
         this.timelineA = new Timeline("a",[0,0,0]),
-        this.timelineM = new Timeline("m",[1000,0,0]),
-        this.timelineS = new Timeline("s",[-1000,0,0]),]
+        // this.timelineM = new Timeline("m",[1000,0,0]),
+        // this.timelineS = new Timeline("s",[-1000,0,0])
+        ]
     }
 
 
 
     populate(){
         this.timelineA.addPanels(this.scene);
-        this.timelineM.addPanels(this.scene);
-        this.timelineS.addPanels(this.scene);
+        // this.timelineM.addPanels(this.scene);
+        // this.timelineS.addPanels(this.scene);
         this.addFloor();
     }
     animate(){

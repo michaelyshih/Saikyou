@@ -82,6 +82,7 @@ window.addEventListener("click", event=>{
         panelClicked = document.getElementById(clicked.userData.id);
         zoomedIn[0].style.display = "flex";
         panelClicked.style.display = "revert";
+
     }
 });
 
@@ -102,7 +103,7 @@ function update(){
 
 
     renderer.render(viewer.scene, camera);
-    viewer.animate();
+    // viewer.animate();
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };
 
