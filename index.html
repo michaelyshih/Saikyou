@@ -22,34 +22,59 @@
 </head>
 
 <body>
+    <nav class="nav-bar">
+        <ul class="access">
+
+            <li><a class="fa-brands fa-facebook" href=""></a></li>
+            <li><a class="fa-brands fa-github" href=""></a></li>
+            <li><a class="fa-brands fa-linkedin" href=""></a></li>
+
+        </ul>
+
+        <ul class="canvas nav">
+            <li id="anime"><a>anime</a></li>
+            <li id="manga"><a>manga</a></li>
+            <li id="music"><a>music</a></li>
+            <li id="back"><a>back</a></li>
+        </ul>
+    </nav>
     <main class="zoomed-in">
-        <nav class="nav-bar">
-            <ul class="access">
 
-                <li><a class="fa-brands fa-facebook" href=""></a></li>
-                <li><a class="fa-brands fa-github" href=""></a></li>
-                <li><a class="fa-brands fa-linkedin" href=""></a></li>
-
-            </ul>
-
-            <ul class="canvas nav">
-                <li ><a>anime</a></li>
-                <li><a>manga</a></li>
-                <li><a>music</a></li>
-                <li><a>back</a></li>
-            </ul>
-        </nav>
         <section class="zoomed-content">
 
-            <!-- <iframe width="800"
+            <iframe
+                id="a181"
+                style="display: none;"
+                width="800"
                 height="500"
                 src="https://www.youtube.com/embed/_NkxM_uLUpw"
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe> -->
-                <img width="800" height="500"src="https://i.ytimg.com/vi/1FliVTcX8bQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLABkyOlL0Bf_2yELcJWW9vdUn7dZg" alt="">
-                <!-- <img width="350" height="500"src="https://i.ytimg.com/vi/1FliVTcX8bQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLABkyOlL0Bf_2yELcJWW9vdUn7dZg" alt="manga imaage"> -->
+                allowfullscreen></iframe>
+
+                <video
+                id="c181"
+                style="display: none;"
+                type="video/mp4"
+                loop
+                autoplay
+                muted
+                src="./src/data/clip1.mp4">
+                </video>
+
+            <img
+                id="a182"
+                style="display: none;"
+                width="800"
+                height="500"
+                src="https://i.ytimg.com/vi/1FliVTcX8bQ/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLABkyOlL0Bf_2yELcJWW9vdUn7dZg" alt="">
+            <img
+            id="a183"
+                width="350"
+                height="500"
+                style="display: none;"
+                src="https://mangadex.org/covers/c52b2ce3-7f95-469c-96b0-479524fb7a1a/f006d923-3d79-4479-80aa-1e20e0a330c7.jpg" alt="manga imaage">
         </section>
         <section class="zoomed-description">
             <h2>title</h2>

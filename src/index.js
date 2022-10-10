@@ -1,9 +1,11 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
-import Papa from "papaparse";
+// import Papa from "papaparse";
+// import fs from "fs";
 
 //csv-parser
+// let files = fs.createReadStream("./data/data.csv");
 // let csvData = [];
 // Papa.parse("",{
 //     header:true,
@@ -13,7 +15,7 @@ import Papa from "papaparse";
 //     complete: function(results,fele){
 //         console.log("Complete", csvData.length,"records.")
 //     }});
-
+// console.log(csvData);
 
 //renderer
 const renderer = new THREE.WebGLRenderer({antialias: true}); // enabling anti-alias to soften corners
@@ -23,7 +25,7 @@ document.body.appendChild( renderer.domElement ); // at the rendered canvas as a
 
 //scene
 const viewer = new Viewer();
-
+viewer.populate();
 
 //camera
 const camera = new THREE.PerspectiveCamera(
@@ -32,6 +34,8 @@ const camera = new THREE.PerspectiveCamera(
     0.1, // near clipping range
     2000); // far clipping range
     camera.position.set(0,50,999);  // set z axis of camera so that it's further away
+
+
 
 //orbital controls
 const controls = new OrbitControls( camera, renderer.domElement );
@@ -45,50 +49,60 @@ controls.update(); // must be called anytime there's change to the camera's tran
 // viewer.scene.add(timeline);
 
 //lighting
-
-
-
-viewer.populate();
-
+// const pointLight = new THREE.PointLight(0xffffff,50); // setting a point light with intesity of 1, color of white
+// camera.add(pointLight);
 
 // raycasting for object interaction
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(); // setting a two dimensinal vector for the location of pointer relative to screen
+
 var clicked;
 
 function onPointermMove(event){
     //setting the pointer position relative to the scaling of width and height of screen
-}
-
-// listeneer for click to interact with object
-window.addEventListener("click", event=>{
-    // onPointermMove(event); // sets the pointe location as the mouse's event location
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+
+
+// listeneer for click to interact with object
+const zoomedIn = document.getElementsByClassName("zoomed-in");
+let panelClicked;
+
+window.addEventListener("click", event=>{
+    onPointermMove(event); // sets the pointe location as the mouse's event location
+
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
 
     const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
-    const zoomedContent = document.getElementsByClassName("zoomed-content");
-    const zoomedDesc = document.getElementsByClassName("zoomed-description");
+
     if(intersects.length > 0 && intersects[0].object.userData.clickable){
         clicked = intersects[0].object;
         console.log(`found clickable ${clicked.userData.id}`) // return the clickable obj name debugging
-
-        // console.log(zoomedContent[0].style);
-        // zoomedContent[0].style.display = "static";
-        // console.log(zoomedContent[0].style);
+        panelClicked = document.getElementById(clicked.userData.id);
+        zoomedIn[0].style.display = "flex";
+        panelClicked.style.display = "revert";
     }
-
 });
 
+// return to canvas when click on back
+const back = document.getElementById("back")
+back.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    zoomedIn[0].style.display = "none";
+    panelClicked.style.display = "none";
+})
 
+
+
+// animate
 function update(){
 
 
 
 
     renderer.render(viewer.scene, camera);
-    // viewer.animate();
+    viewer.animate();
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };
 

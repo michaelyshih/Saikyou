@@ -4,6 +4,7 @@ import Timeline from './timeline.js';
 export default class Viewer3D{
     constructor(){
         this.scene = new THREE.Scene();
+        this.scene.add(new THREE.AmbientLight(0x404040)) // add soft white light to scene
         this.scene.background = new THREE.Color("#95DFFC") // sets the scene's background color
         this.timelines = [
         this.timelineA = new Timeline("a",[0,0,0]),
@@ -27,7 +28,7 @@ export default class Viewer3D{
     addFloor(){
         // floor copy!!!!!!!!!!!!!!!!!!!!!!
         const pos = {x:0, y:-100, z:1000}
-        const scale = {x:3000,y:50,z:2000}
+        const scale = {x:3000,y:50,z:3000}
         const planeGeo = new THREE.BoxGeometry();
         const planeMat = new THREE.MeshBasicMaterial({color:"green"});
         this.plane = {};
