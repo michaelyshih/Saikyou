@@ -3,7 +3,6 @@
 }
 
 body{
-    background-color: none;
     display: flex;
 
     main{
@@ -23,7 +22,6 @@ body{
     canvas{
         position:absolute;
         z-index: -1;
-
     }
 }
 
@@ -33,18 +31,16 @@ body{
     position: fixed;
     left:0;
     right:0;
-    opacity: .50;
     text-align: center;
     justify-content: space-between;
     align-items: center;
     z-index: 3;
 
-
     ul{
         display: flex;
         justify-content:left;
         align-items: center;
-        background-color: white;
+        background-color: rgba( white, 0.5);
         padding: 5px 7px;
         border-radius: 47%;
 
@@ -96,6 +92,25 @@ body{
                 0 0 35px #C72E26,
                 0 0 40px #C72E26;
               }
+        }
+    }
+}
+
+footer{
+    display:flex;
+    position:fixed;
+    width:100%;
+    bottom:20px;
+    justify-content: center;
+
+    .year-bar{
+        display: flex;
+        justify-content: center;
+        width: 60%;
+        background-color: rgba( white, 0.5);
+        border-radius: 10px;
+        #year{
+            width: 90%;
         }
     }
 }

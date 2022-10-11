@@ -35,6 +35,7 @@
             <li id="anime"><a>anime</a></li>
             <li id="manga"><a>manga</a></li>
             <li id="music"><a>music</a></li>
+            <form action="" method="post"></form>
             <li id="back"><a>back</a></li>
         </ul>
     </nav>
@@ -81,6 +82,15 @@
             <p class="Description"></p>
         </section>
     </main>
+    <video
+        id="background-loop-display"
+        style="display: none;"
+        type="video/mp4"
+        loop
+        autoplay
+        muted
+        src="./src/data/background-loop.mp4">
+    </video>
     <video
         id="a221-display"
         style="display: none;"
@@ -211,7 +221,19 @@
     muted
     src="./src/data/a181.mp4">
     </video>
-
+    <footer>
+        <form class="year-bar">
+            <label for="year">Year:</label>
+            <input type="range" id="year" name="year" min="2018" max="2022" list="steplist">
+            <datalist id="steplist">
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+                <option>2022</option>
+            </datalist>
+          </form>
+    </footer>
 
 </body>
 

@@ -33,20 +33,33 @@ const camera = new THREE.PerspectiveCamera(
     window.innerWidth / window.innerHeight, // aspect ratio
     0.1, // near clipping range
     2000); // far clipping range
-    camera.position.set(0,50,999);  // set z axis of camera so that it's further away
+    camera.position.set(0,40,100);  // set z axis of camera so that it's further away
+    camera.lookAt(0,40,0);
+
+//shifting camera according to position
+const yearInput = document.getElementById("year");
+
+yearInput.addEventListener("click",function(e){
+    // let pos1 = camera.position;
+    // let pos2 = new THREE.Vector3(...viewer.currentTimeline.years["y2018"]);
+    // // let newPos = new THREE.Vector3.lerpVectors(pos1, pos2 , [0.0,1.0])
+    // console.log(pos2);
+    // // camera.set(newPos)
+})
 
 
+yearInput.addEventListener("input", function(e){
+    e.preventDefault();
+    let year = "y" + e.target.value;
+    camera.position.set(...viewer.currentTimeline.years[year]);
+    camera.lookAt(0,40,0);
+    console.log(camera.position)
+})
 
 //orbital controls
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.update(); // must be called anytime there's change to the camera's transform
-
-// attempt at setting up TubeGeometry
-// const timelineGeo = new THREE.TubeGeometry({ tubularSegments:1, radius:5, radialSegments:8, closed:true});
-// const timelineMat= new THREE.MeshBasicMaterial({color:"red", wireframe:true});
-// const timeline = new THREE.Mesh( timelineGeo, timelineMat );
-// timeline.position.set(0,0,0)
-// viewer.scene.add(timeline);
+controls.enableDamping = true; // add weight to the orbital camera panning
+controls.dampingFactor = 0.05; // damping factor
 
 //lighting
 // const pointLight = new THREE.PointLight(0xffffff,50); // setting a point light with intesity of 1, color of white
@@ -56,16 +69,14 @@ controls.update(); // must be called anytime there's change to the camera's tran
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(); // setting a two dimensinal vector for the location of pointer relative to screen
 
-var clicked;
-
 function onPointermMove(event){
     //setting the pointer position relative to the scaling of width and height of screen
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
 
-
 // listeneer for click to interact with object
+let clicked;
 const zoomedIn = document.getElementsByClassName("zoomed-in");
 let panelClicked;
 
@@ -94,8 +105,6 @@ back.addEventListener("click",(e)=>{
     panelClicked.style.display = "none";
 })
 
-
-
 // animate
 function update(){
 
@@ -103,6 +112,7 @@ function update(){
 
 
     renderer.render(viewer.scene, camera);
+    controls.update();// must be called anytime there's change to the camera's transform
     // viewer.animate();
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };
