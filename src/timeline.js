@@ -18,7 +18,7 @@ export default class Timeline{
         for (let i = 18; i < 23; i++){
             const year = "20" + i;
             const yearPos = pos.slice(0);
-            yearPos[1] = 40;
+            yearPos[1] = 50;
             yearPos[2] += 100;
             const yrCameraPosKey = "y" + year;
             this.years[yrCameraPosKey] = yearPos;

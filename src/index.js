@@ -33,8 +33,8 @@ const camera = new THREE.PerspectiveCamera(
     window.innerWidth / window.innerHeight, // aspect ratio
     0.1, // near clipping range
     2000); // far clipping range
-    camera.position.set(0,40,100);  // set z axis of camera so that it's further away
-    camera.lookAt(0,40,0);
+camera.position.set(0,40,100);  // set z axis of camera so that it's further away
+
 
 //shifting camera according to position
 const yearInput = document.getElementById("year");
@@ -43,7 +43,6 @@ yearInput.addEventListener("click",function(e){
     // let pos1 = camera.position;
     // let pos2 = new THREE.Vector3(...viewer.currentTimeline.years["y2018"]);
     // // let newPos = new THREE.Vector3.lerpVectors(pos1, pos2 , [0.0,1.0])
-    // console.log(pos2);
     // // camera.set(newPos)
 })
 
@@ -52,8 +51,9 @@ yearInput.addEventListener("input", function(e){
     e.preventDefault();
     let year = "y" + e.target.value;
     camera.position.set(...viewer.currentTimeline.years[year]);
-    camera.lookAt(0,40,0);
-    console.log(camera.position)
+    // camera.lookAt(0,1000,0)
+    console.log(year)
+    if (year === "y2018"){}
 })
 
 //orbital controls
@@ -108,9 +108,7 @@ back.addEventListener("click",(e)=>{
 // animate
 function update(){
 
-
-
-
+    camera.lookAt(0,40,0)
     renderer.render(viewer.scene, camera);
     controls.update();// must be called anytime there's change to the camera's transform
     // viewer.animate();

@@ -6,7 +6,8 @@ export default class Viewer3D{
         this.scene = new THREE.Scene();
         this.scene.add(new THREE.AmbientLight(0x404040)) // add soft white light to scene
         // let background = document.getElementsByClassName("background");
-        let background = document.getElementById("a221-display");
+        let background = document.getElementById("background-loop");
+        background.play();
         this.scene.background = new THREE.VideoTexture(background) // sets the scene's background color
         // this.scene.background = new THREE.Color("#95DFFC") // sets the scene's background color
         this.timelines = [
@@ -23,7 +24,7 @@ export default class Viewer3D{
         this.timelineA.addObjects(this.scene);
         // this.timelineM.addObjects(this.scene);
         // this.timelineS.addObjects(this.scene);
-        // this.addFloor();
+        this.addFloor();
     }
     animate(){
         this.timelines.forEach(timeline=>{
@@ -35,7 +36,7 @@ export default class Viewer3D{
         const pos = {x:0, y:-100, z:1000}
         const scale = {x:3000,y:50,z:3000}
         const planeGeo = new THREE.BoxGeometry();
-        const planeMat = new THREE.MeshBasicMaterial({color:"green"});
+        const planeMat = new THREE.MeshBasicMaterial({color: "black", transparent:true, opacity:0.2 });
         this.plane = {};
         this.plane.mesh= new THREE.Mesh(planeGeo, planeMat);
         this.plane.mesh.position.set(pos.x, pos.y, pos.z);
