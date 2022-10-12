@@ -46,6 +46,7 @@ body{
 
         *{
             padding: 5px 10px;
+
         }
     }
     p{
@@ -53,9 +54,37 @@ body{
         font-size: 24px;
         padding: 6px 31px;
     }
-    a, a:hover, a:focus, a:active{
+    a, a:hover, a:focus{
         text-decoration: none;
         cursor:pointer;
+
+    }
+    #anime, #manga, #songs{
+        // animation: glow 1s infinite alternate;
+        animation: none;
+        @keyframes glow{
+            from { // initial setting array
+                text-shadow: // setting the inital shadow offset(0,0) size and color
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 15px #a83d45,
+                0 0 20px #a83d45,
+                0 0 25px #a83d45,
+                0 0 30px #a83d45,
+                0 0 35px #a83d45;
+              }
+
+              to { // ending setting array
+                text-shadow:
+                0 0 10px #fff,
+                0 0 15px #651b17,
+                0 0 20px #651b17,
+                0 0 25px #651b17,
+                0 0 30px #651b17,
+                0 0 35px #651b17,
+                0 0 40px #651b17;
+              }
+        }
     }
     .access{
         margin-right: 130px;
@@ -105,6 +134,7 @@ body{
     p{
         font-weight: bolder;
         font-size: 20px;
+        white-space: pre-line;
     }
 }
 

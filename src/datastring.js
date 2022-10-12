@@ -345,7 +345,7 @@ const datastring =
       'Twenty-two years later, a young man by the name of Monkey D. Luffy is ready to embark on his own adventure, searching for One Piece and striving to become the new Pirate King. Armed with just a straw hat, a small boat, and an elastic body, he sets out on a fantastic journey to gather his own crew and a worthy ship that will take them across the Grand Line to claim the greatest status on the high seas.',
     mus_link: ''
   },
-  'm192':{
+  'm193':{
     title: 'Kingdom',
     pop: '8',
     rank: '3',
@@ -469,7 +469,7 @@ const datastring =
     pop: '126',
     rank: '1',
     mat_type: 'img',
-    url: 'https://www.youtube.com/watch?CwkzK-F0Y00',
+    url: 'https://www.youtube.com/watch?v=CwkzK-F0Y00',
     mat_url: 'https://i.ytimg.com/vi/MpYy6wwqxoo/hq720.jpg?sqp=-…AFwAcABBg==&rs=AOn4CLACwdtVMop9nwY7XClgdCuCXliNww',
     details: "94,797,524 views  \nMay 31, 2019  \nListen to LiSA's music\n\n",
     mus_link: 'https://LiSA.lnk.to/leo-nine_digital'
@@ -521,12 +521,12 @@ const datastring =
       '▽iTunes',
     mus_link: 'https://music.apple.com/jp/album/1263790414?l=ja'
   },
-  's192':{
+  's193':{
     title: '"Gurenge" MUSiC CLiP (TV anime “Demon Slayer: Kimetsu no Yaiba” Opening theme）',
     pop: '126',
     rank: '3',
     mat_type: 'img',
-    url: 'https://www.youtube.com/watch?CwkzK-F0Y00',
+    url: 'https://www.youtube.com/watch?v=CwkzK-F0Y00',
     mat_url: 'https://i.ytimg.com/vi/MpYy6wwqxoo/hq720.jpg?sqp=-…AFwAcABBg==&rs=AOn4CLACwdtVMop9nwY7XClgdCuCXliNww',
     details: "94,797,524 views  \nMay 31, 2019  \nListen to LiSA's music\n\n",
     mus_link: 'https://LiSA.lnk.to/leo-nine_digital'

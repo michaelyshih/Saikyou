@@ -27,24 +27,7 @@ export default class Timeline{
             for (let j= 1; j <= 3; j++){
                 let panelID = this.type + i + j;
                 const spread = 75;
-
-                if (j === 1){
-                    this.panels[panelID] = new Panel( this.type,panelID, ...pos);
-                    this.panels[panelID].mesh.position.y += spread ;
-                    scene.add( this.panels[panelID].mesh ); // adding item to a scene
-                }
-
-                if (j === 2){
-                    this.panels[panelID] = new Panel(this.type,panelID, ...pos);
-                    this.panels[panelID].mesh.position.x -= spread ;
-                    scene.add( this.panels[panelID].mesh ); // adding item to a scene
-                }
-
-                if (j === 3){
-                    this.panels[panelID] = new Panel(this.type,panelID, ...pos);
-                    this.panels[panelID].mesh.position.x += spread ;
-                    scene.add( this.panels[panelID].mesh ); // adding item to a scene
-                }
+                this.addPanels(panelID,j,pos,spread,scene);
 
             }
             // this.addTime(year,pos);
@@ -57,6 +40,25 @@ export default class Timeline{
     //     this.timeMesh = new TimeMesh(year,pos);
     // }
 
+    addPanels(panelID,j,pos,spread,scene){
+        if (j === 1){
+            this.panels[panelID] = new Panel( this.type,panelID, ...pos);
+            this.panels[panelID].mesh.position.y += spread ;
+            scene.add( this.panels[panelID].mesh ); // adding item to a scene
+        }
+
+        if (j === 2){
+            this.panels[panelID] = new Panel(this.type,panelID, ...pos);
+            this.panels[panelID].mesh.position.x -= spread ;
+            scene.add( this.panels[panelID].mesh ); // adding item to a scene
+        }
+
+        if (j === 3){
+            this.panels[panelID] = new Panel(this.type,panelID, ...pos);
+            this.panels[panelID].mesh.position.x += spread ;
+            scene.add( this.panels[panelID].mesh ); // adding item to a scene
+        }
+    }
     animate(){
         let that = this
         Object.keys(this.panels).forEach(panel=>{

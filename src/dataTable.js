@@ -26,12 +26,14 @@ export default class DataTable{
             content.setAttribute("width","800");
             content.setAttribute("height","500");
             content.setAttribute("src",`${currData.mat_url}`);
+            zoomedContent.appendChild(content);
         } else {
             const content = document.createElement("IMG");
             content.setAttribute("id",`${data_id}`);
             content.setAttribute("width","350");
             content.setAttribute("height","500");
             content.setAttribute("src",`${currData.mat_url}`);
+            zoomedContent.appendChild(content);
         }
 
         const zoomedDesc = document.getElementsByClassName("zoomed-description")[0];
@@ -54,5 +56,32 @@ export default class DataTable{
         descP.innerHTML = `${currData.details}`
         zoomedDesc.appendChild(description);
         zoomedDesc.appendChild(descP);
+    }
+
+    addPanels(type){
+        for (let i = 18; i <= 22;i++){
+            for (let j = 1; j <= 3; j++){
+                const panel_ID = type + i + j;
+                const currData = this.datastring[panel_ID];
+                console.log(currData)
+                if (currData.mat_type === "img"){
+                    const imagePanel = document.createElement("IMG")
+                    imagePanel.setAttribute("id",`${panel_ID}-display`)
+                    imagePanel.setAttribute("style","display: none;")
+                    imagePanel.setAttribute("src",`./src/data/${panel_ID}.jpg`)
+                    document.body.appendChild(imagePanel)
+                } else {
+                    const imagePanel = document.createElement("VIDEO")
+                    imagePanel.setAttribute("id",`${panel_ID}-display`)
+                    imagePanel.setAttribute("style","display: none;")
+                    imagePanel.setAttribute("type","video/mp4")
+                    imagePanel.setAttribute("loop","")
+                    imagePanel.setAttribute("preload","")
+                    imagePanel.setAttribute("muted","")
+                    imagePanel.setAttribute("src",`./src/data/${panel_ID}.mp4`)
+                    document.body.appendChild(imagePanel)
+                }
+            }
+        }
     }
 }

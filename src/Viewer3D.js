@@ -15,11 +15,20 @@ export default class Viewer3D{
         "m": this.timelineM = new Timeline("m",[1000,0,0]),
         "s": this.timelineS = new Timeline("s",[-1000,0,0])
         };
-        this.currentTimeline = this.timelines["a"]
+        this.currentTimeline = this.timelines["a"];
+        this.currentTimelineTag = document.getElementById("anime");
+        this.currentTimelineTag.setAttribute("style","animation: glow .8s infinite alternate;");
     }
 
     switchTimeline(type){
-        this.currentTimeline = this.timelines[type];
+        const typeInit = type[0];
+        const prevKey = Object.keys(this.timelines).find(key=> this.timelines[key] === this.currentTimeline)
+        this.prevTimeline = this.timelines[prevKey];
+        this.currentTimelineTag.setAttribute("style","animation:none;")
+        this.currentTimeline = this.timelines[typeInit];
+        this.currentTimelineTag = document.getElementById( type );
+        this.currentTimelineTag.setAttribute("style","animation: glow .8s infinite alternate;");
+
     }
 
     populate(){

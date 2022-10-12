@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+
 export default class Panel{
 
     constructor(type,panel_id,posX,posY,posZ){
@@ -8,7 +9,7 @@ export default class Panel{
         let setMedia = document.getElementById( this.panel_display );
         this.texture;
         this.type = type;
-        if (this.type === "m" || this.type === "s"){
+        if (this.type === "s"){
             setMedia = document.getElementById("background-loop")
         }
         if (setMedia.tagName === "VIDEO"){
@@ -18,8 +19,11 @@ export default class Panel{
             this.texture = new THREE.Texture(setMedia);
         }
         this.texture.needsUpdate = true;
-
-        this.panelGeo = new THREE.BoxGeometry( 80, 50, 0 );// assigning geometry (width, length, height)
+        if (this.type !== "m"){
+            this.panelGeo = new THREE.BoxGeometry( 80, 50, 0 );// assigning geometry (width, length, height)
+        }else {
+            this.panelGeo = new THREE.BoxGeometry( 35, 50, 0 );// assigning geometry (width, length, height)
+        }
         this.panelMat = new THREE.MeshBasicMaterial( { color: "white", map:this.texture} );// assigning material to geometry
         this.panelMat.needsUpdate = true;
         this.mesh = new THREE.Mesh( this.panelGeo, this.panelMat); // takes in geometry and material to make the item

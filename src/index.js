@@ -27,6 +27,9 @@ document.body.appendChild( renderer.domElement ); // at the rendered canvas as a
 
 //scene
 const viewer = new Viewer();
+const datatable = new DataTable();
+datatable.addPanels("m");
+datatable.addPanels("a");
 viewer.populate();
 
 //camera
@@ -91,7 +94,6 @@ let clicked;
 const zoomedIn = document.getElementsByClassName("zoomed-in");
 let panelClicked;
 // let panelsClicked = []
-const datatable = new DataTable();
 
 const canvas = document.querySelector("canvas");
 canvas.addEventListener("click", event=>{
@@ -116,6 +118,7 @@ canvas.addEventListener("click", event=>{
 //play on hover
 let played;
 let panelPlayed;
+let playList = [];
 let playing = false;
 
 canvas.addEventListener("mousemove", throttle(function(event){
@@ -129,12 +132,23 @@ canvas.addEventListener("mousemove", throttle(function(event){
         played = intersects[0].object;
         const display = played.userData.id + "-display"
         panelPlayed = document.getElementById(display);
-        console.log(`found playable ${played.userData.id}`) // return the playable obj name debugging
+        panelPlayed.muted = true;
         panelPlayed.play();
-        console.log(panelPlayed)
+        if (!playList.includes(panelPlayed)){
+            playList.push(panelPlayed);
+        }
         playing = true;
     }
 },300));
+
+setInterval(() => {
+    if (playing){;
+        playList.shift().pause();
+        if (!playList[0]){
+            playing = false;
+        }
+    }
+}, 20000);
 
 function throttle(cb, interval){
     let enableCall = true;
@@ -165,10 +179,12 @@ const navLink = document.getElementsByClassName("camera nav")
 for (let li of navLink){
     li.addEventListener("click",(e)=>{
         e.stopPropagation();
-        const timleineType =li.childNodes[0].id[0];
-        viewer.switchTimeline(timleineType);
+        const heading = document.getElementsByClassName("heading")[0];
+
+        const timelineType =li.childNodes[0].id;
+        heading.innerHTML = `Every Top 3 ${timelineType[0].toUpperCase() + timelineType.slice(1)} from 2018-2022`;
+        viewer.switchTimeline(timelineType);
         const year = viewer.currentTimeline.currentYear;
-        console.log(viewer.currentTimeline)
         updateCamera(year)
     })
 }
