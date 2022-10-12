@@ -36,22 +36,29 @@ body{
     align-items: center;
     z-index: 3;
 
-    ul{
+    > *{
         display: flex;
         justify-content:left;
         align-items: center;
         background-color: rgba( white, 0.5);
         padding: 5px 7px;
-        border-radius: 47%;
+        border-radius: 50%;
 
         *{
             padding: 5px 10px;
         }
     }
-
+    p{
+        font-weight: 400;
+        font-size: 24px;
+        padding: 6px 31px;
+    }
     a, a:hover, a:focus, a:active{
         text-decoration: none;
         cursor:pointer;
+    }
+    .access{
+        margin-right: 130px;
     }
 
 }
@@ -59,10 +66,11 @@ body{
 .zoomed-description {
     margin-left: 20px;
     color:white;
-
     a, a:hover, a:focus, a:active{
         text-decoration: none;
         color: white;
+        display: flex;
+        justify-content: center;
     }
 
     h2{
@@ -94,6 +102,10 @@ body{
               }
         }
     }
+    p{
+        font-weight: bolder;
+        font-size: 20px;
+    }
 }
 
 footer{
@@ -103,14 +115,24 @@ footer{
     bottom:20px;
     justify-content: center;
 
+
     .year-bar{
         display: flex;
         justify-content: center;
         width: 60%;
         background-color: rgba( white, 0.5);
         border-radius: 10px;
+        flex-direction: column;
+        align-items: center;
         #year{
-            width: 90%;
+            width: 96%;
         }
+    }
+    datalist{
+        display: flex;
+        width: 98%;
+        justify-content: space-between;
+        font-size: 14px;
+
     }
 }

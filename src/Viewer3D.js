@@ -10,25 +10,27 @@ export default class Viewer3D{
         background.play();
         this.scene.background = new THREE.VideoTexture(background) // sets the scene's background color
         // this.scene.background = new THREE.Color("#95DFFC") // sets the scene's background color
-        this.timelines = [
-        this.timelineA = new Timeline("a",[0,0,0]),
-        // this.timelineM = new Timeline("m",[1000,0,0]),
-        // this.timelineS = new Timeline("s",[-1000,0,0])
-        ];
-        this.currentTimeline = this.timelines[0]
+        this.timelines = {
+        "a": this.timelineA = new Timeline("a",[0,0,0]),
+        "m": this.timelineM = new Timeline("m",[1000,0,0]),
+        "s": this.timelineS = new Timeline("s",[-1000,0,0])
+        };
+        this.currentTimeline = this.timelines["a"]
     }
 
-
+    switchTimeline(type){
+        this.currentTimeline = this.timelines[type];
+    }
 
     populate(){
         this.timelineA.addObjects(this.scene);
-        // this.timelineM.addObjects(this.scene);
-        // this.timelineS.addObjects(this.scene);
+        this.timelineM.addObjects(this.scene);
+        this.timelineS.addObjects(this.scene);
         this.addFloor();
     }
     animate(){
-        this.timelines.forEach(timeline=>{
-            timeline.animate();
+        Object.keys(this.timelines).forEach(timeline=>{
+            this.timelines[timeline].animate();
         })
     }
     addFloor(){

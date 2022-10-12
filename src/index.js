@@ -2,21 +2,22 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
 import DataTable from './dataTable';
-import Papa from "papaparse";
-import fs from "fs";
+// import Papa from "papaparse";
+// import fs from "fs";
 
 //csv-parser
-let files = fs.createReadStream("./src/data/data.csv");
-let csvData = [];
-Papa.parse(files,{
-    header:true,
-    step:function(result){
-        csvData.push(result.data)
-    },
-    complete: function(){
-        console.log("Complete", csvData.length,"records.")
-    }});
-console.log(csvData);
+// let file = fs.createReadStream("./src/data/data.csv");
+// let csvData = [];
+// Papa.parse(file, {
+//   header: true,
+//   step: function(result) {
+//     csvData.push(result.data)
+//   },
+//   complete: function(results, file) {
+//     console.log('Complete', csvData.length, 'records.');
+//   }
+// });
+// console.log(csvData);
 
 //renderer
 const renderer = new THREE.WebGLRenderer({antialias: true}); // enabling anti-alias to soften corners
@@ -55,24 +56,20 @@ yearInput.addEventListener("input", function(e){
     e.preventDefault();
     // let pos1 = camera.position;
     const year = "y" + e.target.value;
+    viewer.currentTimeline.currentYear = year;
+    updateCamera(year);
+})
+
+function updateCamera(year){
     const newPos = viewer.currentTimeline.years[year];
     // console.log(newPos)
     camera.position.set(...newPos);
-    newPos[2] -= 100;
-    camera.lookAt(...newPos);
+    const lookingPos = newPos.slice();
+    lookingPos[2] -= 100;
+    camera.lookAt(...lookingPos);
+    controls.target.set(...lookingPos);
     controls.update();
-    // let newPos = new THREE.Vector3().lerpVectors(pos1, pos2 , [0.0,1.0])
-    // console.log("pos1:",pos1)
-    // console.log("pos2:",pos2)
-    // console.log("newPos:",newPos)
-    // console.log(newPos)
-    // console.log(year)
-    // if (year === "y2018"){}
-    // newPos.z -= 100
-    controls.target.set(...newPos);
-    controls.update();
-
-})
+}
 
 //lighting
 // const pointLight = new THREE.PointLight(0xffffff,50); // setting a point light with intesity of 1, color of white
@@ -111,7 +108,7 @@ canvas.addEventListener("click", event=>{
         panelClicked = document.getElementById(clicked.userData.id);
         // panelsClicked.push(panelClicked)
         zoomedIn[0].style.display = "flex";
-        panelClicked.style.display = "revert";
+        // panelClicked.style.display = "revert";
 
     }
 });
@@ -154,10 +151,27 @@ function throttle(cb, interval){
 const back = document.getElementById("back")
 back.addEventListener("click",(e)=>{
     e.stopPropagation();
-    zoomedIn[0].style.display = "none";
+
     // panelClicked.style.display = "none";
     zoomedIn[0].firstElementChild.removeChild(panelClicked);
+    const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
+    while (zoomedDescChildren[0]){
+        zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
+    }
 })
+
+// when clicked on nav bar, switch timelnie
+const navLink = document.getElementsByClassName("camera nav")
+for (let li of navLink){
+    li.addEventListener("click",(e)=>{
+        e.stopPropagation();
+        const timleineType =li.childNodes[0].id[0];
+        viewer.switchTimeline(timleineType);
+        const year = viewer.currentTimeline.currentYear;
+        console.log(viewer.currentTimeline)
+        updateCamera(year)
+    })
+}
 
 // animate
 function update(){
@@ -166,7 +180,7 @@ function update(){
     controls.update();// must be called anytime there's change to the camera's transform
     renderer.render(viewer.scene, camera);
 
-    // viewer.animate();
+    viewer.animate();
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };
 

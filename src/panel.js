@@ -2,11 +2,15 @@ import * as THREE from 'three';
 
 export default class Panel{
 
-    constructor(panel_id,posX,posY,posZ){
+    constructor(type,panel_id,posX,posY,posZ){
         this.panel_display = panel_id + "-display"
         // have video as texture
-        const setMedia = document.getElementById( this.panel_display );
+        let setMedia = document.getElementById( this.panel_display );
         this.texture;
+        this.type = type;
+        if (this.type === "m" || this.type === "s"){
+            setMedia = document.getElementById("background-loop")
+        }
         if (setMedia.tagName === "VIDEO"){
             // setMedia.play();
             this.texture = new THREE.VideoTexture(setMedia);

@@ -30,13 +30,12 @@
             <li><a class="fa-brands fa-linkedin" href="https://www.linkedin.com/in/michael-shih-7ba943244/"></a></li>
 
         </ul>
-
+        <p>Every Top 3 Anime from 2018-2022</p>
         <ul class="canvas nav">
-            <li id="anime"><a>anime</a></li>
-            <li id="manga"><a>manga</a></li>
-            <li id="music"><a>music</a></li>
-            <form action="" method="post"></form>
-            <li id="back"><a>back</a></li>
+            <li class="camera nav"><a id="anime">anime</a></li>
+            <li class="camera nav"><a id="manga">manga</a></li>
+            <li class="camera nav"><a id="songs">music</a></li>
+            <li><a id="back">back</a></li>
         </ul>
     </nav>
     <main class="zoomed-in">
@@ -69,38 +68,41 @@
         </section>
         <section class="zoomed-description">
 
-            <h2 >Title:
+            <!-- <h2 >Title:
                 <p class="title"></p>
             <a href="">
                 <img
                 height="30"
                 width="30"
                 src="https://image.myanimelist.net/ui/OK6W_koKDTOqqqLDbIoPAiC8a86sHufn_jOI-JGtoCQ"
-                alt="myAnimeList link"></a></h2>
+                alt="myAnimeList link"></a></h2> -->
 
-            <h2>Description:</h2>
-            <p class="Description"></p>
+            <!-- <h2>Description:</h2>
+            <p class="Description"></p> -->
         </section>
     </main>
+
+    <footer>
+        <form class="year-bar">
+            <input type="range" id="year" name="year" min="2018" max="2022" list="steplist">
+            <datalist id="steplist">
+                <option>2018</option>
+                <option>2019</option>
+                <option>2020</option>
+                <option>2021</option>
+                <option>2022</option>
+            </datalist>
+          </form>
+    </footer>
     <video
-        id="background-loop"
-        style="display: none;"
-        type="video/mp4"
-        loop
-        preload
-        muted
-        src="./src/data/background-loop.mp4">
-    </video>
-    <video
-    id="test-display"
+    id="background-loop"
     style="display: none;"
     type="video/mp4"
-    autoplay
     loop
     preload
     muted
-    src="./src/data/test.mp4">
-</video>
+    src="./src/data/background-loop.mp4">
+    </video>
     <video
         id="a221-display"
         style="display: none;"
@@ -215,36 +217,23 @@
         src="./src/data/a183.mp4">
     </video>
     <video
-    id="a182-display"
-    style="display: none;"
-    type="video/mp4"
-    loop
-    preload
-    muted
-    src="./src/data/a182.mp4">
+        id="a182-display"
+        style="display: none;"
+        type="video/mp4"
+        loop
+        preload
+        muted
+        src="./src/data/a182.mp4">
     </video>
     <video
-    id="a181-display"
-    style="display: none;"
-    type="video/mp4"
-    loop
-    preload
-    muted
-    src="./src/data/a181.mp4">
+        id="a181-display"
+        style="display: none;"
+        type="video/mp4"
+        loop
+        preload
+        muted
+        src="./src/data/a181.mp4">
     </video>
-    <footer>
-        <form class="year-bar">
-            <label for="year">Year:</label>
-            <input type="range" id="year" name="year" min="2018" max="2022" list="steplist">
-            <datalist id="steplist">
-                <option>2018</option>
-                <option>2019</option>
-                <option>2020</option>
-                <option>2021</option>
-                <option>2022</option>
-            </datalist>
-          </form>
-    </footer>
 
 </body>
 

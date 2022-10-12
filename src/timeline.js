@@ -9,6 +9,7 @@ export default class Timeline{
         this.type =type
         this.panels = {};
         this.years = {};
+        this.currentYear = "y2020";
         this.times=[];
     }
 
@@ -28,19 +29,19 @@ export default class Timeline{
                 const spread = 75;
 
                 if (j === 1){
-                    this.panels[panelID] = new Panel( panelID, ...pos);
+                    this.panels[panelID] = new Panel( this.type,panelID, ...pos);
                     this.panels[panelID].mesh.position.y += spread ;
                     scene.add( this.panels[panelID].mesh ); // adding item to a scene
                 }
 
                 if (j === 2){
-                    this.panels[panelID] = new Panel(panelID, ...pos);
+                    this.panels[panelID] = new Panel(this.type,panelID, ...pos);
                     this.panels[panelID].mesh.position.x -= spread ;
                     scene.add( this.panels[panelID].mesh ); // adding item to a scene
                 }
 
                 if (j === 3){
-                    this.panels[panelID] = new Panel(panelID, ...pos);
+                    this.panels[panelID] = new Panel(this.type,panelID, ...pos);
                     this.panels[panelID].mesh.position.x += spread ;
                     scene.add( this.panels[panelID].mesh ); // adding item to a scene
                 }
