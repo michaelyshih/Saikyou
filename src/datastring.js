@@ -1,4 +1,9 @@
-export const data =
+export default class DataString{
+  constructor(){
+    this.data = datastring;
+  }
+}
+const datastring =
 {
   'a221':{
     title: 'Spy x Family',

@@ -1,21 +1,22 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
-// import Papa from "papaparse";
-// import fs from "fs";
+import DataTable from './dataTable';
+import Papa from "papaparse";
+import fs from "fs";
 
 //csv-parser
-// let files = fs.createReadStream("./data/data.csv");
-// let csvData = [];
-// Papa.parse("",{
-//     header:true,
-//     step:function(result){
-//         csvData.push(result.data)
-//     },
-//     complete: function(results,fele){
-//         console.log("Complete", csvData.length,"records.")
-//     }});
-// console.log(csvData);
+let files = fs.createReadStream("./src/data/data.csv");
+let csvData = [];
+Papa.parse(files,{
+    header:true,
+    step:function(result){
+        csvData.push(result.data)
+    },
+    complete: function(){
+        console.log("Complete", csvData.length,"records.")
+    }});
+console.log(csvData);
 
 //renderer
 const renderer = new THREE.WebGLRenderer({antialias: true}); // enabling anti-alias to soften corners
@@ -33,33 +34,45 @@ const camera = new THREE.PerspectiveCamera(
     window.innerWidth / window.innerHeight, // aspect ratio
     0.1, // near clipping range
     2000); // far clipping range
-camera.position.set(0,40,100);  // set z axis of camera so that it's further away
+camera.position.set(0,40,1100);  // set z axis of camera so that it's further away
 
 
-//shifting camera according to position
-const yearInput = document.getElementById("year");
 
-yearInput.addEventListener("click",function(e){
-    // let pos1 = camera.position;
-    // let pos2 = new THREE.Vector3(...viewer.currentTimeline.years["y2018"]);
-    // // let newPos = new THREE.Vector3.lerpVectors(pos1, pos2 , [0.0,1.0])
-    // // camera.set(newPos)
-})
-
-
-yearInput.addEventListener("input", function(e){
-    e.preventDefault();
-    let year = "y" + e.target.value;
-    camera.position.set(...viewer.currentTimeline.years[year]);
-    // camera.lookAt(0,1000,0)
-    console.log(year)
-    if (year === "y2018"){}
-})
 
 //orbital controls
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true; // add weight to the orbital camera panning
 controls.dampingFactor = 0.05; // damping factor
+controls.enablePan = false;
+// controls.enableRotate= false;
+
+//shifting camera according to position
+const yearInput = document.getElementById("year");
+// let pos1 = camera.position;
+// let pos2 = new THREE.Vector3(...viewer.currentTimeline.years["y2018"]);
+// // camera.set(newPos)
+yearInput.addEventListener("input", function(e){
+    e.preventDefault();
+    // let pos1 = camera.position;
+    const year = "y" + e.target.value;
+    const newPos = viewer.currentTimeline.years[year];
+    // console.log(newPos)
+    camera.position.set(...newPos);
+    newPos[2] -= 100;
+    camera.lookAt(...newPos);
+    controls.update();
+    // let newPos = new THREE.Vector3().lerpVectors(pos1, pos2 , [0.0,1.0])
+    // console.log("pos1:",pos1)
+    // console.log("pos2:",pos2)
+    // console.log("newPos:",newPos)
+    // console.log(newPos)
+    // console.log(year)
+    // if (year === "y2018"){}
+    // newPos.z -= 100
+    controls.target.set(...newPos);
+    controls.update();
+
+})
 
 //lighting
 // const pointLight = new THREE.PointLight(0xffffff,50); // setting a point light with intesity of 1, color of white
@@ -74,13 +87,17 @@ function onPointermMove(event){
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
+// loop video if it's nolonger playing
 
 // listeneer for click to interact with object
 let clicked;
 const zoomedIn = document.getElementsByClassName("zoomed-in");
 let panelClicked;
+// let panelsClicked = []
+const datatable = new DataTable();
 
-window.addEventListener("click", event=>{
+const canvas = document.querySelector("canvas");
+canvas.addEventListener("click", event=>{
     onPointermMove(event); // sets the pointe location as the mouse's event location
 
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
@@ -90,27 +107,65 @@ window.addEventListener("click", event=>{
     if(intersects.length > 0 && intersects[0].object.userData.clickable){
         clicked = intersects[0].object;
         console.log(`found clickable ${clicked.userData.id}`) // return the clickable obj name debugging
+        datatable.addData(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
+        // panelsClicked.push(panelClicked)
         zoomedIn[0].style.display = "flex";
         panelClicked.style.display = "revert";
 
     }
 });
 
+//play on hover
+let played;
+let panelPlayed;
+let playing = false;
+
+canvas.addEventListener("mousemove", throttle(function(event){
+    onPointermMove(event); // sets the pointe location as the mouse's event location
+
+    raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
+
+    const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
+
+    if(intersects.length > 0 && intersects[0].object.userData.playable){
+        played = intersects[0].object;
+        const display = played.userData.id + "-display"
+        panelPlayed = document.getElementById(display);
+        console.log(`found playable ${played.userData.id}`) // return the playable obj name debugging
+        panelPlayed.play();
+        console.log(panelPlayed)
+        playing = true;
+    }
+},300));
+
+function throttle(cb, interval){
+    let enableCall = true;
+    return function(...args){
+        if (!enableCall) return;
+        enableCall = false;
+        cb.apply(this, args);
+        setTimeout(()=>enableCall=true, interval);
+    }
+}
+
+
 // return to canvas when click on back
 const back = document.getElementById("back")
 back.addEventListener("click",(e)=>{
     e.stopPropagation();
     zoomedIn[0].style.display = "none";
-    panelClicked.style.display = "none";
+    // panelClicked.style.display = "none";
+    zoomedIn[0].firstElementChild.removeChild(panelClicked);
 })
 
 // animate
 function update(){
 
-    camera.lookAt(0,40,0)
-    renderer.render(viewer.scene, camera);
+    // camera.lookAt(0,40,0)
     controls.update();// must be called anytime there's change to the camera's transform
+    renderer.render(viewer.scene, camera);
+
     // viewer.animate();
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };

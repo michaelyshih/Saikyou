@@ -47,5 +47,4 @@ export default class Viewer3D{
         this.plane.mesh.userData.clickable = false;
         this.plane.mesh.userData.id = "floor";
     }
-
 }
