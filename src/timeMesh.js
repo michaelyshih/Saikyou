@@ -4,30 +4,31 @@ import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 const loader = new FontLoader(); // uess typeface.json generated fonts
 
-export class TimeMesh{
+export default class TimeMesh{
 
-    constructor (year,pos){
-        loader.load( 'three/examples/fonts/helvetiker_bold.typeface.json', function ( font ) {
-            const textGeo = new TextGeometry( year, {
+    constructor (scene,year,x,y,z){
+        let textGeo, textMat ,textMesh;
+        loader.load( './node_modules/three/examples/fonts/helvetiker_bold.typeface.json', function ( font ) {
+            textGeo = new TextGeometry( year, {
                 font: font,
-                size: 50,
-                height: 10,
+                size: 10,
+                height: 1,
                 curveSegments: 12,
                 bevelEnabled: true,
-                bevelThickness: 10,
-                bevelSize: 8,
-                bevelOffset: 0,
-                bevelSegments: 5
+                bevelThickness: 1,
+                bevelSize: 1,
+                // bevelOffset: 0,
+                // bevelSegments: 5
             });
 
-            const textMat = new THREE.MeshBasicMaterial({color:"white"});
-
-            console.log("textMat:",textMat)
-            console.log("textGeo:",textGeo)
-            that.mesh = new THREE.Mesh(textGeo,textMat);
-            console.log(that.mesh)
+            textMat = new THREE.MeshPhongMaterial({color:"blue"});
+            console.log(textGeo, textMat)
+            textMesh = new THREE.Mesh(textGeo,textMat);
+            // console.log(pos)
+            textMesh.position.set(x-15,y,z-1);
+            scene.add(textMesh);
         });
 
-        // console.log(that.mesh, that)
+
     }
 }

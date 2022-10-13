@@ -38,9 +38,17 @@ const camera = new THREE.PerspectiveCamera(
     window.innerWidth / window.innerHeight, // aspect ratio
     0.1, // near clipping range
     2000); // far clipping range
-camera.position.set(0,40,1100);  // set z axis of camera so that it's further away
+camera.position.set(0,40,2100);  // set z axis of camera so that it's further away
+camera.lookAt(0,40,2000)
 
+//resizing
 
+// window.addEventListener("resize",()=>{
+//     camera.aspect = window.innerWidth / innerHeight;
+//     camera.updateProjectionMatrix;
+
+//     renderer.setSize(window.innerWidth / innerHeight)
+// },false)
 
 
 //orbital controls
@@ -48,6 +56,7 @@ const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true; // add weight to the orbital camera panning
 controls.dampingFactor = 0.05; // damping factor
 controls.enablePan = false;
+
 // controls.enableRotate= false;
 
 //shifting camera according to position
@@ -71,6 +80,7 @@ function updateCamera(year){
     lookingPos[2] -= 100;
     camera.lookAt(...lookingPos);
     controls.target.set(...lookingPos);
+    controls.zoomSpeed = 2;
     controls.update();
 }
 
@@ -87,13 +97,12 @@ function onPointermMove(event){
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
-// loop video if it's nolonger playing
+
 
 // listeneer for click to interact with object
 let clicked;
 const zoomedIn = document.getElementsByClassName("zoomed-in");
 let panelClicked;
-// let panelsClicked = []
 
 const canvas = document.querySelector("canvas");
 canvas.addEventListener("click", event=>{
@@ -108,9 +117,7 @@ canvas.addEventListener("click", event=>{
         console.log(`found clickable ${clicked.userData.id}`) // return the clickable obj name debugging
         datatable.addData(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
-        // panelsClicked.push(panelClicked)
         zoomedIn[0].style.display = "flex";
-        // panelClicked.style.display = "revert";
 
     }
 });
@@ -196,7 +203,7 @@ function update(){
     controls.update();// must be called anytime there's change to the camera's transform
     renderer.render(viewer.scene, camera);
 
-    viewer.animate();
+    // viewer.animate();
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };
 

@@ -63,12 +63,11 @@ export default class DataTable{
             for (let j = 1; j <= 3; j++){
                 const panel_ID = type + i + j;
                 const currData = this.datastring[panel_ID];
-                console.log(currData)
                 if (currData.mat_type === "img"){
                     const imagePanel = document.createElement("IMG")
                     imagePanel.setAttribute("id",`${panel_ID}-display`)
                     imagePanel.setAttribute("style","display: none;")
-                    imagePanel.setAttribute("src",`./src/data/${panel_ID}.jpg`)
+                    imagePanel.setAttribute("src",`src/data/${panel_ID}.jpg`)
                     document.body.appendChild(imagePanel)
                 } else {
                     const imagePanel = document.createElement("VIDEO")
