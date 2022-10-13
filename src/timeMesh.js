@@ -8,7 +8,7 @@ export default class TimeMesh{
 
     constructor (scene,year,x,y,z){
         let textGeo, textMat ,textMesh;
-        loader.load( './node_modules/three/examples/fonts/helvetiker_bold.typeface.json', function ( font ) {
+        loader.load( 'data/fonts/helvetiker_bold.typeface.json', function ( font ) {
             textGeo = new TextGeometry( year, {
                 font: font,
                 size: 10,
