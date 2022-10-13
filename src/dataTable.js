@@ -46,7 +46,7 @@ export default class DataTable{
         linkImg.setAttribute("height","50");
         if (data_id[0] === "a") linkImg.setAttribute("src","https://image.myanimelist.net/ui/OK6W_koKDTOqqqLDbIoPAiC8a86sHufn_jOI-JGtoCQ");
         if (data_id[0] === "m") linkImg.setAttribute("src","https://mangadex.org/_nuxt/ddb5721c5458b5edc9d6782a5f107119.svg");
-        if (data_id[0] === "s") linkImg.setAttribute("src","https://toppng.com/uploads/preview/youtube-logo-transparent-png-pictures-transparent-background-youtube-logo-11562856729oa42buzkng.png");
+        if (data_id[0] === "s") linkImg.setAttribute("src","data/youtube.png");
         link.appendChild(linkImg)
         const description = document.createElement("H2");
         description.innerHTML = "Description:"

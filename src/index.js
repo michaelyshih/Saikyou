@@ -173,12 +173,15 @@ canvas.addEventListener("click", event=>{
     if (inZoom){
         // remove forground by clicking background
         zoomedIn[0].firstElementChild.removeChild(panelClicked);
+        zoomedIn[0].setAttribute("style","display:none");
         const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
+
         while (zoomedDescChildren[0]){
             zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
         }
 
-        if (currentlyPlaying[0])unpauseBackground();
+        // if (currentlyPlaying[0]) unpauseBackground();
+
         inZoom = false;
 
     }
@@ -187,11 +190,11 @@ canvas.addEventListener("click", event=>{
         clicked = intersects[0].object;
         datatable.addData(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
-        zoomedIn[0].style.display = "flex";
-        inZoom = true;
+        zoomedIn[0].setAttribute("style","display: flex;");
 
+        inZoom = true;
         //pause currently playing
-        if (currentlyPlaying[0]) pauseBackground();
+        // if (currentlyPlaying[0]) pauseBackground();
         // remove listener for hover
 
     }
@@ -252,11 +255,13 @@ back.addEventListener("click",(e)=>{
 
     // panelClicked.style.display = "none";
     zoomedIn[0].firstElementChild.removeChild(panelClicked);
+    zoomedIn[0].setAttribute("style","display:none");
     const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
     while (zoomedDescChildren[0]){
         zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
     }
-    unpauseBackground();
+    if (currentlyPlaying[0]) unpauseBackground();
+
     inZoom = false;
 })
 
