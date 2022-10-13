@@ -84,6 +84,5 @@ In addition, this project will include:
 - Thursday
 	-
 ## Bonus Features (Optional): ##
-- having
 - having flip animation for the book meshes
 - having meshs for the music that can play on discs
