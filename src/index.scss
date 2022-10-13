@@ -5,6 +5,19 @@
 body{
     display: flex;
 
+    #loading-page{
+        height: 100vh;
+        width: 100vw;
+        z-index: 4;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 100px;
+        font-weight: 700;
+        font-family: cursive;
+    }
+
     main{
         display: none;
         background-color: black;

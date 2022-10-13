@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import Panel from "./panel.js";
 import  TimeMesh  from './timeMesh.js';
 
@@ -31,10 +30,9 @@ export default class Timeline{
 
             }
             this.addTime(scene,year,pos);
-            // console.log(this.timeMesh.mesh.material)
-            // scene.add(this.timeMesh.mesh);
+
             pos[2] += 500; // adding the distance between each year
-            // console.log(scene)
+
         }
     }
     addTime(scene,year,pos){

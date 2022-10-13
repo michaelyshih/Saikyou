@@ -6,8 +6,6 @@ export default class DataTable{
         this.datastring = datastring.data;
     }
     addData(data_id){
-        // console.log(data_id[0])
-        // console.log(this.datastring[data_id].mat_type)
         const currData = this.datastring[data_id]
         const zoomedContent = document.getElementsByClassName("zoomed-content")[0];
         if (currData.mat_type === "vid"){

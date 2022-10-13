@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
 import DataTable from './dataTable';
+import { LoadingManager } from 'three';
 // import Papa from "papaparse";
 // import fs from "fs";
 
@@ -31,6 +32,10 @@ const datatable = new DataTable();
 datatable.addPanels("m");
 datatable.addPanels("a");
 viewer.populate();
+
+//amibent lighting
+// const ambientLight = new THREE.AmbientLight(0xffffff,1.0);
+// viewer.scene.add(ambientLightColor);
 
 //camera
 const camera = new THREE.PerspectiveCamera(
@@ -74,7 +79,6 @@ yearInput.addEventListener("input", function(e){
 
 function updateCamera(year){
     const newPos = viewer.currentTimeline.years[year];
-    // console.log(newPos)
     camera.position.set(...newPos);
     const lookingPos = newPos.slice();
     lookingPos[2] -= 100;
@@ -103,6 +107,7 @@ function onPointermMove(event){
 let clicked;
 const zoomedIn = document.getElementsByClassName("zoomed-in");
 let panelClicked;
+let inZoom;
 
 const canvas = document.querySelector("canvas");
 canvas.addEventListener("click", event=>{
@@ -112,21 +117,28 @@ canvas.addEventListener("click", event=>{
 
     const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
 
+    if (inZoom){
+        zoomedIn[0].firstElementChild.removeChild(panelClicked);
+        const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
+        while (zoomedDescChildren[0]){
+            zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
+        }
+        inZoom = false;
+    }
+
     if(intersects.length > 0 && intersects[0].object.userData.clickable){
         clicked = intersects[0].object;
-        console.log(`found clickable ${clicked.userData.id}`) // return the clickable obj name debugging
         datatable.addData(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
         zoomedIn[0].style.display = "flex";
-
+        inZoom = true;
     }
+
 });
 
 //play on hover
 let played;
 let panelPlayed;
-let playList = [];
-let playing = false;
 
 canvas.addEventListener("mousemove", throttle(function(event){
     onPointermMove(event); // sets the pointe location as the mouse's event location
@@ -140,22 +152,26 @@ canvas.addEventListener("mousemove", throttle(function(event){
         const display = played.userData.id + "-display"
         panelPlayed = document.getElementById(display);
         panelPlayed.muted = true;
+        panelPlayed.loop = true;
+        // console.log(`found playable ${display}`)
         panelPlayed.play();
+        setTimeout(panelPlayed.pause, 20000);
+
         if (!playList.includes(panelPlayed)){
             playList.push(panelPlayed);
         }
-        playing = true;
     }
 },300));
 
-setInterval(() => {
-    if (playing){;
-        playList.shift().pause();
-        if (!playList[0]){
-            playing = false;
-        }
-    }
-}, 20000);
+// setInterval(() => {
+//     if (playing){;
+//         // console.log(playList);
+//         playList.shift().pause();
+//         if (!playList[0]){
+//             playing = false;
+//         }
+//     }
+// }, 20000);
 
 function throttle(cb, interval){
     let enableCall = true;
@@ -179,6 +195,7 @@ back.addEventListener("click",(e)=>{
     while (zoomedDescChildren[0]){
         zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
     }
+    inZoom = false;
 })
 
 // when clicked on nav bar, switch timelnie
@@ -199,7 +216,6 @@ for (let li of navLink){
 // animate
 function update(){
 
-    // camera.lookAt(0,40,0)
     controls.update();// must be called anytime there's change to the camera's transform
     renderer.render(viewer.scene, camera);
 
@@ -207,12 +223,21 @@ function update(){
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };
 
-update();
+
 
 // adding reflective plane
-
-// adding panels
-// const groundGeo = new THREE.PlaneGeometry(100,100)
-// const groundMat = new THREE.MeshBasicMaterial({color: })
-
-//csv parser
+const loadingManager = new THREE.LoadingManager();
+const videos = document.getElementsByTagName("video")
+for (let video of videos){
+    loadingManager.itemStart(video.src);
+    video.addEventListener("canplaythrough", function videoCanPlay(){
+        video.removeEventListener("canplaythrough", videoCanPlay,false);
+        loadingManager.itemEnd(video.src);
+    },false)
+}
+loadingManager.onLoad = function(){
+    console.log("videos finished canplaythrough");
+    let loadingpage = document.getElementById("loading-page");
+    loadingpage.setAttribute("style","display:none;");
+    update();
+}

@@ -22,9 +22,7 @@ export default class TimeMesh{
             });
 
             textMat = new THREE.MeshPhongMaterial({color:"blue"});
-            console.log(textGeo, textMat)
             textMesh = new THREE.Mesh(textGeo,textMat);
-            // console.log(pos)
             textMesh.position.set(x-15,y,z-1);
             scene.add(textMesh);
         });
