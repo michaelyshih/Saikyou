@@ -203,7 +203,7 @@ function update(){
     controls.update();// must be called anytime there's change to the camera's transform
     renderer.render(viewer.scene, camera);
 
-    // viewer.animate();
+    viewer.animate();
     requestAnimationFrame(update); // loop every time the scene is refreshed => 60 fps
 };
 

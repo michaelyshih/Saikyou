@@ -77,7 +77,7 @@ export default class DataTable{
                     imagePanel.setAttribute("loop","")
                     imagePanel.setAttribute("preload","")
                     imagePanel.setAttribute("muted","")
-                    imagePanel.setAttribute("src",`./src/data/${panel_ID}.mp4`)
+                    imagePanel.setAttribute("src",`src/data/${panel_ID}.mp4`)
                     document.body.appendChild(imagePanel)
                 }
             }
