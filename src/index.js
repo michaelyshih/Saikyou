@@ -163,7 +163,7 @@ let panelClicked;
 let inZoom;
 
 
-canvas.addEventListener("click", event=>{
+canvas.addEventListener("mousedown", event=>{
     onPointermMove(event); // sets the pointe location as the mouse's event location
 
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
@@ -249,8 +249,8 @@ function unpauseBackground(){
 
 
 // return to canvas when click on back
-const back = document.getElementById("back")
-back.addEventListener("click",(e)=>{
+const home = document.getElementById("home")
+home.addEventListener("click",(e)=>{
     e.stopPropagation();
 
     // panelClicked.style.display = "none";

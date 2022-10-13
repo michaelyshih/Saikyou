@@ -18,20 +18,27 @@ export default class DataTable{
             content.setAttribute("allow","accelerometer; preload; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen");
             zoomedContent.appendChild(content);
         } else if (data_id[0] === "a" || data_id[0] === "s"){
-            console.log(data_id[0])
+            const largelink = document.createElement("A");
+            largelink.setAttribute("href",`${currData.url}`);
+            largelink.setAttribute("target", "_blank");
+            zoomedContent.appendChild(largelink);
             const content = document.createElement("IMG");
             content.setAttribute("id",`${data_id}`);
             content.setAttribute("width","800");
             content.setAttribute("height","500");
             content.setAttribute("src",`${currData.mat_url}`);
-            zoomedContent.appendChild(content);
+            largelink.appendChild(content);
         } else {
+            const largelink = document.createElement("A");
+            largelink.setAttribute("href",`${currData.url}`);
+            largelink.setAttribute("target", "_blank");
+            zoomedContent.appendChild(largelink);
             const content = document.createElement("IMG");
             content.setAttribute("id",`${data_id}`);
             content.setAttribute("width","350");
             content.setAttribute("height","500");
             content.setAttribute("src",`${currData.mat_url}`);
-            zoomedContent.appendChild(content);
+            largelink.appendChild(content);
         }
 
         const zoomedDesc = document.getElementsByClassName("zoomed-description")[0];
@@ -40,6 +47,7 @@ export default class DataTable{
         zoomedDesc.appendChild(title);
         const link = document.createElement("A");
         link.setAttribute("href",`${currData.url}`);
+        link.setAttribute("target", "_blank");
         zoomedDesc.appendChild(link);
         const linkImg = document.createElement("IMG");
         linkImg.setAttribute("width","50");
