@@ -56,7 +56,7 @@ export default class DataTable{
         zoomedDesc.appendChild(descP);
     }
 
-    addPanels(type){
+    addPanelsData(type){
         for (let i = 18; i <= 22;i++){
             for (let j = 1; j <= 3; j++){
                 const panel_ID = type + i + j;

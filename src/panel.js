@@ -9,9 +9,9 @@ export default class Panel{
         let setMedia = document.getElementById( this.panel_display );
         this.texture;
         this.type = type;
-        if (this.type === "s"){
-            setMedia = document.getElementById("background-loop")
-        }
+        // if (this.type === "s"){
+        //     setMedia = document.getElementById("background-loop")
+        // }
         if (setMedia.tagName === "VIDEO"){
             // setMedia.play();
             this.texture = new THREE.VideoTexture(setMedia);
@@ -31,7 +31,11 @@ export default class Panel{
         this.mesh.userData.clickable = true;
         this.mesh.userData.id = panel_id;
         this.mesh.userData.playing = false;
-        if (setMedia.tagName === "VIDEO") this.mesh.userData.playable = true;
+        if (setMedia.tagName === "VIDEO"){
+            this.mesh.userData.playable = true;
+        } else {
+            this.mesh.userData.playable = false;
+        }
 
     }
 

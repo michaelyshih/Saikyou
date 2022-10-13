@@ -29,8 +29,9 @@ document.body.appendChild( renderer.domElement ); // at the rendered canvas as a
 //scene
 const viewer = new Viewer();
 const datatable = new DataTable();
-datatable.addPanels("m");
-datatable.addPanels("a");
+datatable.addPanelsData("m");
+datatable.addPanelsData("a");
+datatable.addPanelsData("s");
 viewer.populate();
 
 //amibent lighting
@@ -95,53 +96,17 @@ function updateCamera(year){
 // raycasting for object interaction
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2(); // setting a two dimensinal vector for the location of pointer relative to screen
-
+const canvas = document.querySelector("canvas");
 function onPointermMove(event){
     //setting the pointer position relative to the scaling of width and height of screen
 	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
 	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
 
-
-// listeneer for click to interact with object
-let clicked;
-const zoomedIn = document.getElementsByClassName("zoomed-in");
-let panelClicked;
-let inZoom;
-
-const canvas = document.querySelector("canvas");
-canvas.addEventListener("click", event=>{
-    onPointermMove(event); // sets the pointe location as the mouse's event location
-
-    raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
-
-    const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
-
-    if (inZoom){
-        zoomedIn[0].firstElementChild.removeChild(panelClicked);
-        const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
-        while (zoomedDescChildren[0]){
-            zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
-        }
-        inZoom = false;
-    }
-
-    if(intersects.length > 0 && intersects[0].object.userData.clickable){
-        clicked = intersects[0].object;
-        datatable.addData(clicked.userData.id);
-        panelClicked = document.getElementById(clicked.userData.id);
-        zoomedIn[0].style.display = "flex";
-        inZoom = true;
-    }
-
-});
-
 //play on hover
-let played;
-let panelPlayed;
-// let playList = [];
+let currentlyPlaying = [];
 
-canvas.addEventListener("mousemove", throttle(function(event){
+canvas.addEventListener("mousemove", throttle(function (event){
     onPointermMove(event); // sets the pointe location as the mouse's event location
 
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
@@ -150,34 +115,89 @@ canvas.addEventListener("mousemove", throttle(function(event){
 
     if(intersects.length > 0 && intersects[0].object.userData.playable){
 
-        const mesh = intersects[0].object;
-        if (!mesh.userData.playing){
-            played = intersects[0].object;
-            const display = played.userData.id + "-display"
-            panelPlayed = document.getElementById(display);
-            panelPlayed.muted = true;
+        const played = intersects[0].object;
+        const display = played.userData.id + "-display"
+        const panelPlayed = document.getElementById(display);
+
+        if (!played.userData.playing){
+            // panelPlayed.muted = true;
             panelPlayed.loop = true;
-            // console.log(`found playable ${display}`)
             panelPlayed.play();
-            mesh.userData.playing = true;
-            setTimeout(function(){
-                mesh.userData.playing = false;
-                console.log(`${display} is paused`)
-                panelPlayed.pause();
-            }, 20000);
+            played.userData.playing = true;
+            if (display[0] !== "s"){
+                setTimeout(function(){
+                    played.userData.playing = false;
+                    panelPlayed.pause();
+                    }
+                , 30000)
+            } else {
+                // once it media starts playing and it's a song
+                // put song into currently playing and change the background to the song
+
+                if (currentlyPlaying[0]) {
+                    currentlyPlaying[0][1].userData.playing = false;
+                    currentlyPlaying.shift()[0].pause()
+                    currentlyPlaying.push([panelPlayed,played]);
+                    console.log(currentlyPlaying)
+                }else {
+                    currentlyPlaying.push([panelPlayed,played]);
+                };
+                viewer.scene.background = new THREE.VideoTexture(panelPlayed)
+                const pause = document.getElementById("pause");
+                pause.setAttribute("style","display:revert");
+
+            }
+        // } else {
+        //     if (display[0] === "s"){
+        //         panelPlayed.pause()
+        //         played.userData.playing = false;
+        //     };
         }
     }
-},300));
+},250));
 
-// setInterval(() => {
-//     if (playing){;
-//         // console.log(playList);
-//         playList.shift().pause();
-//         if (!playList[0]){
-//             playing = false;
-//         }
-//     }
-// }, 20000);
+// listeneer for click to interact with object
+let clicked;
+const zoomedIn = document.getElementsByClassName("zoomed-in");
+let panelClicked;
+let inZoom;
+
+
+canvas.addEventListener("click", event=>{
+    onPointermMove(event); // sets the pointe location as the mouse's event location
+
+    raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
+
+    const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
+
+    if (inZoom){
+        // remove forground by clicking background
+        zoomedIn[0].firstElementChild.removeChild(panelClicked);
+        const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
+        while (zoomedDescChildren[0]){
+            zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
+        }
+
+        if (currentlyPlaying[0])unpauseBackground();
+        inZoom = false;
+
+    }
+
+    if(intersects.length > 0 && intersects[0].object.userData.clickable){
+        clicked = intersects[0].object;
+        datatable.addData(clicked.userData.id);
+        panelClicked = document.getElementById(clicked.userData.id);
+        zoomedIn[0].style.display = "flex";
+        inZoom = true;
+
+        //pause currently playing
+        if (currentlyPlaying[0]) pauseBackground();
+        // remove listener for hover
+
+    }
+
+});
+
 
 function throttle(cb, interval){
     let enableCall = true;
@@ -188,6 +208,41 @@ function throttle(cb, interval){
         setTimeout(()=>enableCall=true, interval);
     }
 }
+
+// pause and unpause button to pause and unpause on click
+const pause = document.getElementById("pause")
+const unpause = document.getElementById("unpause")
+
+pause.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    pauseBackground();
+})
+
+unpause.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    unpauseBackground();
+})
+
+//pause/ unpause video
+function pauseBackground(){
+    currentlyPlaying[0][1].userData.playing = false;
+    currentlyPlaying[0][0].pause();
+
+    const background = document.getElementById("background-loop");
+    viewer.scene.background = new THREE.VideoTexture(background);
+    pause.setAttribute("style","display:none");
+    unpause.setAttribute("style","display:revert");
+}
+
+function unpauseBackground(){
+    currentlyPlaying[0][1].userData.playing = true;
+    currentlyPlaying[0][0].play();
+
+    viewer.scene.background = new THREE.VideoTexture(currentlyPlaying[0][0]);
+    unpause.setAttribute("style","display:none");
+    pause.setAttribute("style","display:revert");
+}
+
 
 
 // return to canvas when click on back
@@ -201,8 +256,11 @@ back.addEventListener("click",(e)=>{
     while (zoomedDescChildren[0]){
         zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
     }
+    unpauseBackground();
     inZoom = false;
 })
+
+
 
 // when clicked on nav bar, switch timelnie
 const navLink = document.getElementsByClassName("camera nav")
