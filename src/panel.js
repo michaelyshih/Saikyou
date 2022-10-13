@@ -30,6 +30,7 @@ export default class Panel{
         this.mesh.position.set(posX,posY,posZ);
         this.mesh.userData.clickable = true;
         this.mesh.userData.id = panel_id;
+        this.mesh.userData.playing = false;
         if (setMedia.tagName === "VIDEO") this.mesh.userData.playable = true;
 
     }

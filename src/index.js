@@ -139,6 +139,7 @@ canvas.addEventListener("click", event=>{
 //play on hover
 let played;
 let panelPlayed;
+// let playList = [];
 
 canvas.addEventListener("mousemove", throttle(function(event){
     onPointermMove(event); // sets the pointe location as the mouse's event location
@@ -148,17 +149,22 @@ canvas.addEventListener("mousemove", throttle(function(event){
     const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
 
     if(intersects.length > 0 && intersects[0].object.userData.playable){
-        played = intersects[0].object;
-        const display = played.userData.id + "-display"
-        panelPlayed = document.getElementById(display);
-        panelPlayed.muted = true;
-        panelPlayed.loop = true;
-        // console.log(`found playable ${display}`)
-        panelPlayed.play();
-        setTimeout(panelPlayed.pause, 20000);
 
-        if (!playList.includes(panelPlayed)){
-            playList.push(panelPlayed);
+        const mesh = intersects[0].object;
+        if (!mesh.userData.playing){
+            played = intersects[0].object;
+            const display = played.userData.id + "-display"
+            panelPlayed = document.getElementById(display);
+            panelPlayed.muted = true;
+            panelPlayed.loop = true;
+            // console.log(`found playable ${display}`)
+            panelPlayed.play();
+            mesh.userData.playing = true;
+            setTimeout(function(){
+                mesh.userData.playing = false;
+                console.log(`${display} is paused`)
+                panelPlayed.pause();
+            }, 20000);
         }
     }
 },300));
