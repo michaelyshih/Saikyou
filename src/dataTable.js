@@ -67,7 +67,7 @@ export default class DataTable{
                     const imagePanel = document.createElement("IMG")
                     imagePanel.setAttribute("id",`${panel_ID}-display`)
                     imagePanel.setAttribute("style","display: none;")
-                    imagePanel.setAttribute("src",`src/data/${panel_ID}.jpg`)
+                    imagePanel.setAttribute("src",`/src/data/${panel_ID}.jpg`)
                     document.body.appendChild(imagePanel)
                 } else {
                     const imagePanel = document.createElement("VIDEO")
@@ -77,7 +77,7 @@ export default class DataTable{
                     imagePanel.setAttribute("loop","")
                     imagePanel.setAttribute("preload","")
                     imagePanel.setAttribute("muted","")
-                    imagePanel.setAttribute("src",`src/data/${panel_ID}.mp4`)
+                    imagePanel.setAttribute("src",`/src/data/${panel_ID}.mp4`)
                     document.body.appendChild(imagePanel)
                 }
             }
