@@ -48,14 +48,21 @@ camera.position.set(0,40,2100);  // set z axis of camera so that it's further aw
 camera.lookAt(0,40,2000)
 
 //resizing
+function resizeCanvasToDisplaySize() {
+    const canvas = renderer.domElement;
+    // look up the size the canvas is being displayed
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    // adjust displayBuffer size to match
+    if (canvas.width !== width || canvas.height !== height) {
+      // you must pass false here or three.js sadly fights the browser
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
 
-// window.addEventListener("resize",()=>{
-//     camera.aspect = window.innerWidth / innerHeight;
-//     camera.updateProjectionMatrix;
-
-//     renderer.setSize(window.innerWidth / innerHeight)
-// },false)
-
+      // update any render target sizes here
+    }
+  }
 
 //orbital controls
 const controls = new OrbitControls( camera, renderer.domElement );
@@ -122,6 +129,10 @@ canvas.addEventListener("mousemove", throttle(function (event){
         if (!played.userData.playing){
             // panelPlayed.muted = true;
             panelPlayed.loop = true;
+            panelPlayed.muted = true;
+            if (panelPlayed.id[0] === "s"){
+                panelPlayed.muted = false;
+            }
             panelPlayed.play();
             played.userData.playing = true;
             if (display[0] !== "s"){
@@ -147,11 +158,6 @@ canvas.addEventListener("mousemove", throttle(function (event){
                 pause.setAttribute("style","display:revert");
 
             }
-        // } else {
-        //     if (display[0] === "s"){
-        //         panelPlayed.pause()
-        //         played.userData.playing = false;
-        //     };
         }
     }
 },250));
@@ -162,16 +168,14 @@ const zoomedIn = document.getElementsByClassName("zoomed-in");
 let panelClicked;
 let inZoom;
 
-
 canvas.addEventListener("mousedown", event=>{
-    onPointermMove(event); // sets the pointe location as the mouse's event location
-
+    onPointermMove(event); // sets the points location as the mouse's event location
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
-
     const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
 
     if (inZoom){
-        // remove forground by clicking background
+        // remove foreground by clicking background
+        console.log(zoomedIn[0])
         zoomedIn[0].firstElementChild.removeChild(panelClicked);
         zoomedIn[0].setAttribute("style","display:none");
         const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
@@ -179,11 +183,7 @@ canvas.addEventListener("mousedown", event=>{
         while (zoomedDescChildren[0]){
             zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
         }
-
-        // if (currentlyPlaying[0]) unpauseBackground();
-
         inZoom = false;
-
     }
 
     if(intersects.length > 0 && intersects[0].object.userData.clickable){
@@ -191,7 +191,6 @@ canvas.addEventListener("mousedown", event=>{
         datatable.addData(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
         zoomedIn[0].setAttribute("style","display: flex;");
-
         inZoom = true;
         //pause currently playing
         // if (currentlyPlaying[0]) pauseBackground();
@@ -201,7 +200,7 @@ canvas.addEventListener("mousedown", event=>{
 
 });
 
-
+//throttle function to limit hover event
 function throttle(cb, interval){
     let enableCall = true;
     return function(...args){
@@ -248,24 +247,22 @@ function unpauseBackground(){
 
 
 
-// return to canvas when click on back
+// return to canvas when click on home
 const home = document.getElementById("home")
 home.addEventListener("click",(e)=>{
     e.stopPropagation();
-
-    // panelClicked.style.display = "none";
-    zoomedIn[0].firstElementChild.removeChild(panelClicked);
-    zoomedIn[0].setAttribute("style","display:none");
+    const zoomedImgChildren = zoomedIn[0].firstElementChild.children;
+    while (zoomedImgChildren[0]){
+        zoomedImgChildren[0].parentNode.removeChild(zoomedImgChildren[0]);
+    }
     const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
+    zoomedIn[0].setAttribute("style","display:none");
     while (zoomedDescChildren[0]){
         zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
     }
     if (currentlyPlaying[0]) unpauseBackground();
-
     inZoom = false;
 })
-
-
 
 // when clicked on nav bar, switch timelnie
 const navLink = document.getElementsByClassName("camera nav")
@@ -286,6 +283,7 @@ for (let li of navLink){
 function update(){
 
     controls.update();// must be called anytime there's change to the camera's transform
+    resizeCanvasToDisplaySize()
     renderer.render(viewer.scene, camera);
 
     viewer.animate();
@@ -295,7 +293,7 @@ function update(){
 
 
 // adding reflective plane
-const loadingManager = new THREE.LoadingManager();
+const loadingManager = new LoadingManager();
 const videos = document.getElementsByTagName("video")
 for (let video of videos){
     loadingManager.itemStart(video.src);

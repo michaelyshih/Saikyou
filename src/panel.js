@@ -13,7 +13,6 @@ export default class Panel{
         //     setMedia = document.getElementById("background-loop")
         // }
         if (setMedia.tagName === "VIDEO"){
-            // setMedia.play();
             this.texture = new THREE.VideoTexture(setMedia);
         } else {
             this.texture = new THREE.Texture(setMedia);
@@ -41,7 +40,7 @@ export default class Panel{
 
     animate() {
         // this.mesh.rotation.x += 0.01; // rotation in speed per second
-        this.mesh.rotation.y += 0.01;
+        this.mesh.rotation.y += 0.005;
     };
 
 };
