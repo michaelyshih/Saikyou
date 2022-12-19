@@ -49,16 +49,20 @@ camera.lookAt(0,40,2000)
 
 //resizing
 function resizeCanvasToDisplaySize() {
-    const canvas = renderer.domElement;
+    // const canvas = renderer.domElement;
     // look up the size the canvas is being displayed
     const width = window.innerWidth;
     const height = window.innerHeight;
+
     // adjust displayBuffer size to match
     if (canvas.width !== width || canvas.height !== height) {
-      // you must pass false here or three.js sadly fights the browser
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
+    // you must pass false here or three.js sadly fights the browser
+    console.log("width:" + width)
+    console.log("height:" + height)
+    renderer.setSize(width, height);
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
 
       // update any render target sizes here
     }
@@ -282,8 +286,8 @@ for (let li of navLink){
 // animate
 function update(){
 
-    controls.update();// must be called anytime there's change to the camera's transform
     resizeCanvasToDisplaySize()
+    controls.update();// must be called anytime there's change to the camera's transform
     renderer.render(viewer.scene, camera);
 
     viewer.animate();
@@ -306,5 +310,7 @@ loadingManager.onLoad = function(){
     console.log("videos finished canplaythrough");
     let loadingpage = document.getElementById("loading-page");
     loadingpage.setAttribute("style","display:none;");
+    // loadingpage.innerHTML= "Done"
+    // debugger
     update();
 }
