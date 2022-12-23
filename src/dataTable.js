@@ -37,7 +37,8 @@ export default class DataTable{
             content.setAttribute("id",`${data_id}`);
             content.setAttribute("width","350");
             content.setAttribute("height","500");
-            content.setAttribute("src",`${currData.mat_url}`);
+            content.crossOrigin = "Anonymous";
+            content.setAttribute("src",`data/${data_id}.jpg`);
             largelink.appendChild(content);
         }
 

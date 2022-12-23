@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
 import DataTable from './dataTable';
 import { LoadingManager } from 'three';
+import SplashPage from './SplashPage';
 // import Papa from "papaparse";
 // import fs from "fs";
 
@@ -39,34 +40,34 @@ viewer.populate();
 // viewer.scene.add(ambientLightColor);
 
 //camera
+const aspect = window.innerWidth / window.innerHeight
 const camera = new THREE.PerspectiveCamera(
     75, // field of view
-    window.innerWidth / window.innerHeight, // aspect ratio
+    aspect, // aspect ratio
     0.1, // near clipping range
     2000); // far clipping range
 camera.position.set(0,40,2100);  // set z axis of camera so that it's further away
 camera.lookAt(0,40,2000)
 
 //resizing
-function resizeCanvasToDisplaySize() {
+// function resizeCanvasToDisplaySize() {
+window.addEventListener("resize",()=>{
     // const canvas = renderer.domElement;
     // look up the size the canvas is being displayed
     const width = window.innerWidth;
     const height = window.innerHeight;
 
     // adjust displayBuffer size to match
-    if (canvas.width !== width || canvas.height !== height) {
+    // if (canvas.width !== width || canvas.height !== height) {
     // you must pass false here or three.js sadly fights the browser
-    console.log("width:" + width)
-    console.log("height:" + height)
     renderer.setSize(width, height);
-
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 
       // update any render target sizes here
-    }
-  }
+})
+    // }
+//   }
 
 //orbital controls
 const controls = new OrbitControls( camera, renderer.domElement );
@@ -81,14 +82,17 @@ const yearInput = document.getElementById("year");
 // let pos1 = camera.position;
 // let pos2 = new THREE.Vector3(...viewer.currentTimeline.years["y2018"]);
 // // camera.set(newPos)
+let currentYear;
 yearInput.addEventListener("input", function(e){
     e.preventDefault();
     // let pos1 = camera.position;
     const year = "y" + e.target.value;
+    currentYear = year;
     viewer.currentTimeline.currentYear = year;
     updateCamera(year);
 })
 
+//updating camera to new year location
 function updateCamera(year){
     const newPos = viewer.currentTimeline.years[year];
     camera.position.set(...newPos);
@@ -193,7 +197,9 @@ canvas.addEventListener("mousedown", event=>{
     if(intersects.length > 0 && intersects[0].object.userData.clickable){
         clicked = intersects[0].object;
         datatable.addData(clicked.userData.id);
+        console.log(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
+
         zoomedIn[0].setAttribute("style","display: flex;");
         inZoom = true;
         //pause currently playing
@@ -278,7 +284,7 @@ for (let li of navLink){
         const timelineType =li.childNodes[0].id;
         heading.innerHTML = `Every Top 3 ${timelineType[0].toUpperCase() + timelineType.slice(1)} from 2018-2022`;
         viewer.switchTimeline(timelineType);
-        const year = viewer.currentTimeline.currentYear;
+        const year = currentYear;
         updateCamera(year)
     })
 }
@@ -286,7 +292,7 @@ for (let li of navLink){
 // animate
 function update(){
 
-    resizeCanvasToDisplaySize()
+    // resizeCanvasToDisplaySize();
     controls.update();// must be called anytime there's change to the camera's transform
     renderer.render(viewer.scene, camera);
 
@@ -307,10 +313,9 @@ for (let video of videos){
     },false)
 }
 loadingManager.onLoad = function(){
-    console.log("videos finished canplaythrough");
-    let loadingpage = document.getElementById("loading-page");
-    loadingpage.setAttribute("style","display:none;");
-    // loadingpage.innerHTML= "Done"
+    const splash = new SplashPage();
+    splash.addFinishedPage()
+    // loadingpage.setAttribute("style","display:none;");
     // debugger
     update();
 }
