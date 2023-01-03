@@ -6,25 +6,93 @@ button{
     opacity: .5;
 }
 
+p{
+    margin:0;
+    padding: 0;
+}
+
 body{
     display: flex;
     background-color: black;
 
     #loading-page{
+        background-image: url("../data/torii-gate.gif");
+        background-size: cover;
+        background-blend-mode: overlay;
+        mix-blend-mode: screen;
         height: 100vh;
         width: 100vw;
         z-index: 4;
         background-color: white;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         font-size: 100px;
         font-weight: 700;
         font-family: cursive;
 
+        #loading-images{
+            display: flex;
+            width: 100vw;
+            justify-content: center;
+
+                #loading-text{
+                    height: auto;
+                    width: auto;
+                    overflow: hidden;
+                    text-align: center;
+                    font-size: 80px;
+                    display: flex;
+                    align-items: center;
+                }
+
+        }
+
         #loading-picture{
             height: 150px;
             width: 150px;
+        }
+
+        #enter-information{
+            display: flex;
+            justify-content: start;
+            align-items: flex-start;
+            font-size: small;
+
+            .info-container{
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                margin: 20px;
+                width: 115px;
+            }
+
+            .mouse-container{
+                height: 75px;
+                width: 50px;
+                overflow: hidden;
+            }
+
+            .mouse{
+                width: 300px;
+                height: auto;
+                position: relative;
+                top: -15px;
+                margin-left: -10px;
+            }
+
+            #right-click{
+                margin-left: -8px;
+            }
+
+            #scroll{
+                margin-left: -67px;
+            }
+
+            #hover{
+                margin-left: -240px;
+            }
         }
     }
 

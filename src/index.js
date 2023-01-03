@@ -82,7 +82,7 @@ const yearInput = document.getElementById("year");
 // let pos1 = camera.position;
 // let pos2 = new THREE.Vector3(...viewer.currentTimeline.years["y2018"]);
 // // camera.set(newPos)
-let currentYear;
+let currentYear = viewer.currentTimeline.currentYear;
 yearInput.addEventListener("input", function(e){
     e.preventDefault();
     // let pos1 = camera.position;
@@ -317,8 +317,6 @@ for (let video of videos){
 loadingManager.onLoad = function(){
     const splash = new SplashPage();
     splash.addFinishedPage();
-
-    // splash.removeFinishedPage();
     // loadingpage.setAttribute("style","display:none;");
     // debugger
     update();

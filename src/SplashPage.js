@@ -11,7 +11,8 @@ export default class SplashPage{
         const enterButton = document.getElementById("enter-button")
         const loadingPicture = document.getElementById("loading-picture")
         const loadingImages = document.getElementById("loading-images")
-        loadingImages.innerHTML = "Done"
+        const loadingText = document.getElementById("loading-text")
+        loadingText.innerHTML = "Welcome"
         loadingPicture.setAttribute("src","https://i.gifer.com/2iFa.gif")
         loadingImages.appendChild(loadingPicture)
         enterButton.innerHTML = "Enter"
