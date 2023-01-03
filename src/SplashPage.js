@@ -6,11 +6,28 @@ export default class SplashPage{
     }
 
     addFinishedPage(){
-        // this.loadingPage.appendChild();
+        // this.loadingPage.innerHTML = "";
+        // const newLoadinPage = document.createElement()
+        const enterButton = document.getElementById("enter-button")
+        const loadingPicture = document.getElementById("loading-picture")
+        const loadingImages = document.getElementById("loading-images")
+        loadingImages.innerHTML = "Done"
+        loadingPicture.setAttribute("src","https://i.gifer.com/2iFa.gif")
+        loadingImages.appendChild(loadingPicture)
+        enterButton.innerHTML = "Enter"
+        // debugger
+        enterButton.addEventListener("click", event=>{
+            this.removeFinishedPage();
+        })
+
+    }
+
+    removeFinishedPage(){
+        //removing the finishing page from parent node
         this.loadingPage.parentNode.removeChild(this.loadingPage);
     }
 
     addImages(){
-        
+
     }
 }

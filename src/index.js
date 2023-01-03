@@ -303,6 +303,7 @@ function update(){
 
 
 // adding reflective plane
+//video loading manager
 const loadingManager = new LoadingManager();
 const videos = document.getElementsByTagName("video")
 for (let video of videos){
@@ -312,9 +313,12 @@ for (let video of videos){
         loadingManager.itemEnd(video.src);
     },false)
 }
+// waiting on canplaythrough
 loadingManager.onLoad = function(){
     const splash = new SplashPage();
-    splash.addFinishedPage()
+    splash.addFinishedPage();
+
+    // splash.removeFinishedPage();
     // loadingpage.setAttribute("style","display:none;");
     // debugger
     update();

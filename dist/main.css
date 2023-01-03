@@ -25,6 +25,10 @@ body #loading-page {
   font-weight: 700;
   font-family: cursive;
 }
+body #loading-page #loading-picture {
+  height: 150px;
+  width: 150px;
+}
 body main {
   display: none;
   background-color: black;
