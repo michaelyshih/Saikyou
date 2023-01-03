@@ -125,9 +125,6 @@ body canvas {
   padding: 5px 7px;
   border-radius: 50%;
 }
-.nav-bar > * * {
-  padding: 5px 10px;
-}
 .nav-bar p {
   font-weight: 400;
   font-size: 24px;
@@ -136,6 +133,7 @@ body canvas {
 .nav-bar a, .nav-bar a:hover, .nav-bar a:focus {
   text-decoration: none;
   cursor: pointer;
+  padding: 5px 10px;
 }
 .nav-bar #anime, .nav-bar #manga, .nav-bar #songs {
   animation: none;
@@ -158,6 +156,7 @@ body canvas {
   flex-direction: column;
   display: flex;
   align-items: center;
+  padding-bottom: 100px;
 }
 .zoomed-description a, .zoomed-description a:hover, .zoomed-description a:focus, .zoomed-description a:active {
   text-decoration: none;

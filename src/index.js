@@ -183,7 +183,6 @@ canvas.addEventListener("mousedown", event=>{
 
     if (inZoom){
         // remove foreground by clicking background
-        console.log(zoomedIn[0])
         zoomedIn[0].firstElementChild.removeChild(panelClicked);
         zoomedIn[0].setAttribute("style","display:none");
         const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
@@ -199,6 +198,7 @@ canvas.addEventListener("mousedown", event=>{
         datatable.addData(clicked.userData.id);
         console.log(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
+        changeButtons();
 
         zoomedIn[0].setAttribute("style","display: flex;");
         inZoom = true;
@@ -267,12 +267,32 @@ home.addEventListener("click",(e)=>{
     }
     const zoomedDescChildren = zoomedIn[0].lastElementChild.children;
     zoomedIn[0].setAttribute("style","display:none");
+    changeButtons();
     while (zoomedDescChildren[0]){
         zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
     }
     if (currentlyPlaying[0]) unpauseBackground();
     inZoom = false;
 })
+
+function changeButtons(){
+    const homeButton = document.getElementById("home");
+    const animeButton = document.getElementById("anime")
+    const mangaButton = document.getElementById("manga")
+    const songsButton = document.getElementById("songs")
+
+    if (inZoom){
+        animeButton.setAttribute("style","display: revert;")
+        mangaButton.setAttribute("style","display: revert;")
+        songsButton.setAttribute("style","display: revert;")
+        homeButton.setAttribute("style","display: none;")
+    } else {
+        animeButton.setAttribute("style","display: none;")
+        mangaButton.setAttribute("style","display: none;")
+        songsButton.setAttribute("style","display: none;")
+        homeButton.setAttribute("style","display: revert;")
+    }
+}
 
 // when clicked on nav bar, switch timelnie
 const navLink = document.getElementsByClassName("camera nav")
