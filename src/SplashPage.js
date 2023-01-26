@@ -12,10 +12,10 @@ export default class SplashPage{
         const loadingPicture = document.getElementById("loading-picture")
         const loadingImages = document.getElementById("loading-images")
         const loadingText = document.getElementById("loading-text")
-        loadingText.innerHTML = "Welcome"
+        loadingText.innerHTML = "Saikyou"
         loadingPicture.setAttribute("src","https://i.gifer.com/2iFa.gif")
         loadingImages.appendChild(loadingPicture)
-        enterButton.innerHTML = "Enter"
+        enterButton.innerHTML = "Welcome"
         // debugger
         enterButton.addEventListener("click", event=>{
             this.removeFinishedPage();

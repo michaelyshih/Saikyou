@@ -44,7 +44,7 @@ export default class DataTable{
 
         const zoomedDesc = document.getElementsByClassName("zoomed-description")[0];
         const title = document.createElement("H2");
-        title.innerHTML = `Title: ${currData.title}`
+        title.innerHTML = `${currData.title}`
         zoomedDesc.appendChild(title);
         const link = document.createElement("A");
         link.setAttribute("href",`${currData.url}`);

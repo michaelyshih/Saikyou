@@ -12,14 +12,15 @@ p{
 }
 
 body{
+    width: 100vw;
     display: flex;
     background-color: black;
 
     #loading-page{
-        background-image: url("../data/torii-gate.gif");
-        background-size: cover;
-        background-blend-mode: overlay;
-        mix-blend-mode: screen;
+        // background-image: url("../data/torii-gate.gif");
+        // background-size: cover;
+        // background-blend-mode: overlay;
+        // mix-blend-mode: screen;
         height: 100vh;
         width: 100vw;
         z-index: 4;
@@ -93,6 +94,18 @@ body{
             #hover{
                 margin-left: -240px;
             }
+        }
+
+        #enter-button{
+            width: 100px;
+            height: 75px;
+            font-size: large;
+            border-radius: 12px;
+        }
+
+        #enter-button:hover{
+            background-color: gray;
+            cursor: pointer;
         }
     }
 
@@ -178,9 +191,9 @@ body{
               }
         }
     }
-    .access{
-        margin-right: 130px;
-    }
+    // .access{
+        // margin-right: 130px;
+    // }
 
 }
 
@@ -190,7 +203,7 @@ body{
     flex-direction: column;
     display: flex;
     align-items: center;
-    padding-bottom: 100px;
+    // padding-bottom: 100px;
 
     a, a:hover, a:focus, a:active{
         text-decoration: none;
@@ -198,6 +211,7 @@ body{
         display: flex;
         justify-content: center;
         width: 50px;
+        padding-bottom: 20px;
     }
 
     h2{
@@ -230,10 +244,25 @@ body{
         }
     }
     p{
+        width: 90vw;
         font-weight: bolder;
         font-size: 20px;
         white-space: pre-line;
         align-self: start;
+        padding: 10px;
+        background-image: url(../data/torii-gate.gif);
+        background-size: cover;
+        background-color: gray;
+        background-blend-mode: color-burn;
+    }
+}
+
+.enter-descritpion{
+
+    p{
+        width: 90vw;
+        font-size: small;
+        padding-bottom: 20px;
     }
 }
 

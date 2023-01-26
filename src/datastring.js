@@ -240,7 +240,7 @@ const datastring =
     mat_type: 'img',
     url: 'https://mangadex.org/title/6b958848-c885-4735-9201-12ee77abcb3c',
     mat_url: 'https://mangadex.org/covers/6b958848-c885-4735-9201-12ee77abcb3c/613db897-cf37-4f5c-b7b5-caa1e0b46b60.jpg',
-    details: 'The master spy codenamed <Twilight> has spent his days on undercover missions, all for the dream of a better world. But one day, he receives a particularly difficult new order from command. For his mission, he must form a temporary family and start a new life?! A Spy/Action/Comedy about a one-of-a-kind family!',
+    details: 'The master spy codenamed Twilight has spent his days on undercover missions, all for the dream of a better world. But one day, he receives a particularly difficult new order from command. For his mission, he must form a temporary family and start a new life?! A Spy/Action/Comedy about a one-of-a-kind family!',
     mus_link: ''
   },
   'm211':{

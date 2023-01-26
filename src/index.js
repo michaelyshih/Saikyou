@@ -157,7 +157,6 @@ canvas.addEventListener("mousemove", throttle(function (event){
                     currentlyPlaying[0][1].userData.playing = false;
                     currentlyPlaying.shift()[0].pause()
                     currentlyPlaying.push([panelPlayed,played]);
-                    console.log(currentlyPlaying)
                 }else {
                     currentlyPlaying.push([panelPlayed,played]);
                 };
@@ -196,7 +195,6 @@ canvas.addEventListener("mousedown", event=>{
     if(intersects.length > 0 && intersects[0].object.userData.clickable){
         clicked = intersects[0].object;
         datatable.addData(clicked.userData.id);
-        console.log(clicked.userData.id);
         panelClicked = document.getElementById(clicked.userData.id);
         changeButtons();
 
@@ -275,6 +273,7 @@ home.addEventListener("click",(e)=>{
     inZoom = false;
 })
 
+//reverse nav buttons
 function changeButtons(){
     const homeButton = document.getElementById("home");
     const animeButton = document.getElementById("anime")
@@ -323,6 +322,7 @@ function update(){
 
 
 // adding reflective plane
+
 //video loading manager
 const loadingManager = new LoadingManager();
 const videos = document.getElementsByTagName("video")
@@ -334,8 +334,9 @@ for (let video of videos){
     },false)
 }
 // waiting on canplaythrough
+const splash = new SplashPage();
 loadingManager.onLoad = function(){
-    const splash = new SplashPage();
+
     splash.addFinishedPage();
     // loadingpage.setAttribute("style","display:none;");
     // debugger

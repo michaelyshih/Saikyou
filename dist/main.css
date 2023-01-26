@@ -15,14 +15,11 @@ p {
 }
 
 body {
+  width: 100vw;
   display: flex;
   background-color: black;
 }
 body #loading-page {
-  background-image: url("../data/torii-gate.gif");
-  background-size: cover;
-  background-blend-mode: overlay;
-  mix-blend-mode: screen;
   height: 100vh;
   width: 100vw;
   z-index: 4;
@@ -87,6 +84,16 @@ body #loading-page #enter-information #scroll {
 body #loading-page #enter-information #hover {
   margin-left: -240px;
 }
+body #loading-page #enter-button {
+  width: 100px;
+  height: 75px;
+  font-size: large;
+  border-radius: 12px;
+}
+body #loading-page #enter-button:hover {
+  background-color: gray;
+  cursor: pointer;
+}
 body main {
   display: none;
   background-color: black;
@@ -146,9 +153,6 @@ body canvas {
     text-shadow: 0 0 10px #fff, 0 0 15px #651b17, 0 0 20px #651b17, 0 0 25px #651b17, 0 0 30px #651b17, 0 0 35px #651b17, 0 0 40px #651b17;
   }
 }
-.nav-bar .access {
-  margin-right: 130px;
-}
 
 .zoomed-description {
   margin-left: 20px;
@@ -156,7 +160,6 @@ body canvas {
   flex-direction: column;
   display: flex;
   align-items: center;
-  padding-bottom: 100px;
 }
 .zoomed-description a, .zoomed-description a:hover, .zoomed-description a:focus, .zoomed-description a:active {
   text-decoration: none;
@@ -164,6 +167,7 @@ body canvas {
   display: flex;
   justify-content: center;
   width: 50px;
+  padding-bottom: 20px;
 }
 .zoomed-description h2 {
   margin-top: 0px;
@@ -180,10 +184,22 @@ body canvas {
   }
 }
 .zoomed-description p {
+  width: 90vw;
   font-weight: bolder;
   font-size: 20px;
   white-space: pre-line;
   align-self: start;
+  padding: 10px;
+  background-image: url(../data/torii-gate.gif);
+  background-size: cover;
+  background-color: gray;
+  background-blend-mode: color-burn;
+}
+
+.enter-descritpion p {
+  width: 90vw;
+  font-size: small;
+  padding-bottom: 20px;
 }
 
 footer {
