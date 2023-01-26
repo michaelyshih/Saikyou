@@ -202,7 +202,7 @@ body{
 }
 
 .zoomed-description {
-    margin-left: 20px;
+    // margin-left: 20px;
     color: white;
     flex-direction: column;
     display: flex;
@@ -248,15 +248,16 @@ body{
         }
     }
     p{
-        width: 90vw;
+        width: auto;
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-bottom: 50px;
         font-weight: bolder;
-        font-size: 20px;
+        font-size: 22px;
         white-space: pre-line;
-        align-self: start;
-        padding: 10px;
         background-image: url(../data/torii-gate.gif);
         background-size: cover;
-        background-color: gray;
+        background-color: rgb(192 144 144);
         background-blend-mode: color-burn;
     }
 }
@@ -264,8 +265,10 @@ body{
 .enter-descritpion{
 
     p{
-        width: 90vw;
-        font-size: small;
+        width: auto;
+        font-size: 15px;
+        padding-left: 200px;
+        padding-right: 200px;
         padding-bottom: 20px;
     }
 }
