@@ -84,6 +84,9 @@ body #loading-page #enter-information #scroll {
 body #loading-page #enter-information #hover {
   margin-left: -240px;
 }
+body #loading-page #enter-information p {
+  text-align: center;
+}
 body #loading-page #enter-button {
   width: 100px;
   height: 75px;

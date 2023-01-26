@@ -279,16 +279,19 @@ function changeButtons(){
     const animeButton = document.getElementById("anime")
     const mangaButton = document.getElementById("manga")
     const songsButton = document.getElementById("songs")
+    const footer = document.getElementById("footer")
 
     if (inZoom){
         animeButton.setAttribute("style","display: revert;")
         mangaButton.setAttribute("style","display: revert;")
         songsButton.setAttribute("style","display: revert;")
+        footer.setAttribute("style","display: flex;")
         homeButton.setAttribute("style","display: none;")
     } else {
         animeButton.setAttribute("style","display: none;")
         mangaButton.setAttribute("style","display: none;")
         songsButton.setAttribute("style","display: none;")
+        footer.setAttribute("style","display: none;")
         homeButton.setAttribute("style","display: revert;")
     }
 }
