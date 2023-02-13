@@ -28,89 +28,118 @@ body{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        font-size: 100px;
-        font-weight: 700;
-        font-family: cursive;
 
-        #loading-images{
+        .loading-page-main-content{
             display: flex;
-            width: 100vw;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            font-weight: 700;
+            font-family: cursive;
 
-                #loading-text{
-                    height: auto;
-                    width: auto;
-                    overflow: hidden;
-                    text-align: center;
-                    font-size: 80px;
+            #loading-images{
+                display: flex;
+                width: 100vw;
+                justify-content: center;
+
+                    #loading-text{
+                        height: auto;
+                        width: auto;
+                        overflow: hidden;
+                        text-align: center;
+                        font-size: 80px;
+                        display: flex;
+                        align-items: center;
+                    }
+            }
+
+            #loading-picture{
+                height: 150px;
+                width: 150px;
+            }
+
+            #enter-information{
+                display: flex;
+                justify-content: start;
+                align-items: flex-start;
+                font-size: small;
+
+                .info-container{
                     display: flex;
                     align-items: center;
+                    flex-direction: column;
+                    margin: 20px;
+                    width: 115px;
                 }
 
-        }
+                .mouse-container{
+                    height: 75px;
+                    width: 50px;
+                    overflow: hidden;
+                }
 
-        #loading-picture{
-            height: 150px;
-            width: 150px;
-        }
+                .mouse{
+                    width: 300px;
+                    height: auto;
+                    position: relative;
+                    top: -15px;
+                    margin-left: -10px;
+                }
 
-        #enter-information{
-            display: flex;
-            justify-content: start;
-            align-items: flex-start;
-            font-size: small;
+                #right-click{
+                    margin-left: -8px;
+                }
 
-            .info-container{
-                display: flex;
-                align-items: center;
-                flex-direction: column;
-                margin: 20px;
-                width: 115px;
+                #scroll{
+                    margin-left: -67px;
+                }
+
+                #hover{
+                    margin-left: -240px;
+                }
+
+                p{
+                    text-align: center;
+                }
             }
 
-            .mouse-container{
+            #enter-button{
+                width: 100px;
                 height: 75px;
-                width: 50px;
-                overflow: hidden;
+                font-size: large;
+                border-radius: 12px;
             }
 
-            .mouse{
-                width: 300px;
-                height: auto;
-                position: relative;
-                top: -15px;
-                margin-left: -10px;
-            }
-
-            #right-click{
-                margin-left: -8px;
-            }
-
-            #scroll{
-                margin-left: -67px;
-            }
-
-            #hover{
-                margin-left: -240px;
-            }
-
-            p{
-                text-align: center;
+            #enter-button:hover{
+                background-color: gray;
+                cursor: pointer;
             }
         }
 
-        #enter-button{
-            width: 100px;
-            height: 75px;
-            font-size: large;
-            border-radius: 12px;
+        .loading-page-footer{
+            justify-content: center;
+            align-items: end;
+            width: 100%;
+            display: flex;
+            position: fixed;
+            margin: 0;
+            padding: 0;
+            font-size: 3rem;
+            bottom: 0;
+
+            >*{
+                padding: 10px;
+            }
+            a, a:hover, a:focus{
+                text-decoration: none;
+                cursor:pointer;
+                padding: 5px 10px;
+            }
+
         }
 
-        #enter-button:hover{
-            background-color: gray;
-            cursor: pointer;
-        }
+
     }
 
     main{
@@ -137,6 +166,7 @@ body{
 }
 
 .nav-bar{
+    height: 75px;
     margin: 10px 25px;
     display:flex;
     position: fixed;
@@ -146,26 +176,52 @@ body{
     justify-content: space-between;
     align-items: center;
     z-index: 3;
+    color: #fff;
+}
+
+
+.heading-nav{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    // position: absolute;
+    width: 100%;
+    height: 100px;
+
+    p{
+        // width: 15em;
+        // background-color: rgba( white, 0.5);
+        // border-radius: 50%;
+        // font-weight: 400;
+        font-size: 35px;
+        // padding: 6px 31px;
+    }
+
+}
+
+.nav-bar-links{
+    margin: 10px 25px;
+    display:flex;
+    position: fixed;
+    left:0;
+    right:0;
+    justify-content: space-between;
 
     > *{
         display: flex;
         justify-content:left;
         align-items: center;
-        background-color: rgba( white, 0.5);
+        // background-color: rgba( white, 0.5);
         padding: 5px 7px;
         border-radius: 50%;
-
-    }
-    p{
-        font-weight: 400;
-        font-size: 24px;
-        padding: 6px 31px;
 
     }
     a, a:hover, a:focus{
         text-decoration: none;
         cursor:pointer;
+        font-size: 30px;
         padding: 5px 10px;
+        color: #fff;
 
     }
     #anime, #manga, #songs{
@@ -220,9 +276,10 @@ body{
 
     h2{
         margin-top:0px;
-        font-size: 30px;
+        font-size: 40px;
         text-align: center;
         animation: glow 1s infinite alternate;
+
         @keyframes glow{
             from { // initial setting array
                 text-shadow: // setting the inital shadow offset(0,0) size and color
@@ -248,17 +305,17 @@ body{
         }
     }
     p{
-        width: auto;
-        padding-left: 100px;
-        padding-right: 100px;
-        padding-bottom: 50px;
+        width: 70vw;
+        padding: 75px 50px 35px 50px;
         font-weight: bolder;
-        font-size: 22px;
+        font-size: 30px;
         white-space: pre-line;
         background-image: url(../data/torii-gate.gif);
         background-size: cover;
-        background-color: rgb(192 144 144);
+        background-color: rgb(192, 144, 144);
         background-blend-mode: color-burn;
+        -webkit-text-stroke-width: 0.6px;
+        -webkit-text-stroke-color: black;
     }
 }
 
@@ -266,7 +323,7 @@ body{
 
     p{
         width: auto;
-        font-size: 15px;
+        font-size: 25px;
         padding-left: 200px;
         padding-right: 200px;
         padding-bottom: 20px;

@@ -24,76 +24,87 @@
 
 <body>
     <div id="loading-page">
-        <div id="loading-images">
-            <p id="loading-text">Loading</p>
-            <img
-            src="https://media.tenor.com/Y5bdzjEvcFIAAAAi/kitty-chase-pixel.gif"
-            alt="running cat"
-            id="loading-picture">
-        </div>
-        <div id="enter-information">
-            <div id="mouse1" class="info-container">
-                <div class="mouse-container">
-                    <img
-                    id="right-click"
-                    class="mouse"
-                    src="data/mouse.jpg">
-                </div>
-                <p id="right-click-text">Click to show info</p>
+        <section class="loading-page-main-content">
+            <div id="loading-images">
+                <p id="loading-text">Loading</p>
+                <img
+                src="data/kitty-chase-pixel.gif"
+                alt="running cat"
+                id="loading-picture">
             </div>
-            <div id="mouse2" class="info-container">
-                <div class="mouse-container">
-                    <img
-                    id="scroll"
-                    class="mouse"
-                    src="data/mouse.jpg">
+            <div id="enter-information">
+                <div id="mouse1" class="info-container">
+                    <div class="mouse-container">
+                        <img
+                        id="right-click"
+                        class="mouse"
+                        src="data/mouse.jpg">
+                    </div>
+                    <p id="right-click-text">Click to show info</p>
                 </div>
-                <p id="scroll-text">Scroll to zoom</p>
-            </div>
-            <div id="mouse3" class="info-container">
-                <div class="mouse-container">
-                    <img
-                    id="right-click"
-                    class="mouse"
-                    src="data/mouse.jpg">
+                <div id="mouse2" class="info-container">
+                    <div class="mouse-container">
+                        <img
+                        id="scroll"
+                        class="mouse"
+                        src="data/mouse.jpg">
+                    </div>
+                    <p id="scroll-text">Scroll to zoom</p>
                 </div>
-                <p id="drag-text">Drag to pane</p>
-            </div>
-            <div id="mouse4" class="info-container">
-                <div class="mouse-container">
-                    <img
-                    id="hover"
-                    class="mouse"
-                    src="data/mouse.jpg">
+                <div id="mouse3" class="info-container">
+                    <div class="mouse-container">
+                        <img
+                        id="right-click"
+                        class="mouse"
+                        src="data/mouse.jpg">
+                    </div>
+                    <p id="drag-text">Drag to pane</p>
                 </div>
-                <p id="hover-text">hover to play (some panels play)</p>
+                <div id="mouse4" class="info-container">
+                    <div class="mouse-container">
+                        <img
+                        id="hover"
+                        class="mouse"
+                        src="data/mouse.jpg">
+                    </div>
+                    <p id="hover-text">hover to play (some panels play)</p>
+                </div>
             </div>
-        </div>
-        <div class="enter-descritpion">
-            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyAnimeList is a very extensive encyclopedia and forum that allows users to look up anime with many sorting options,
-                but they do not have a section to show the most popular shows (based on members watching) of each year.
-                This project is an attempt to display the top 3 popular anime (by members on MyAnimeList), manga (by volume sold), anime music (by views and billboard chart at end of year) of each year for the last 5 years.</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The project allows you to scroll through a timeline in 3d space exploring the last 5 years and look at the most popular anime / manga/ music of that year. You could select year by scrolling slider or by selecting them. When clicked, the item you picked will display the information of the anime with links and details to external sites where you could explore more.</p>
-        </div>
-        <button id="enter-button">Wait</button>
+            <div class="enter-descritpion">
+                <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MyAnimeList is a very extensive encyclopedia and forum that allows users to look up anime with many sorting options,
+                    but they do not have a section to show the most popular shows (based on members watching) of each year.
+                    This project is an attempt to display the top 3 popular anime (by members on MyAnimeList), manga (by volume sold), anime music (by views and billboard chart at end of year) of each year for the last 5 years.</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The project allows you to scroll through a timeline in 3d space exploring the last 5 years and look at the most popular anime / manga/ music of that year. You could select year by scrolling slider or by selecting them. When clicked, the item you picked will display the information of the anime with links and details to external sites where you could explore more.</p>
+            </div>
+            <button id="enter-button">Wait</button>
+        </section>
+        <ul class="loading-page-footer">
+                <li><a class="fa-brands fa-facebook" target="_blank" href="https://www.facebook.com/michael.shih2"></a></li>
+                <li><a class="fa-brands fa-github" target="_blank" href="https://github.com/michaelyshih/"></a></li>
+                <li><a class="fa-brands fa-linkedin" target="_blank" href="https://www.linkedin.com/in/michael-shih-7ba943244/"></a></li>
+        </ul>
     </div>
-    <nav class="nav-bar">
-        <ul class="access">
-            <li><a class="fa-brands fa-facebook" target="_blank" href="https://www.facebook.com/michael.shih2"></a></li>
-            <li><a class="fa-brands fa-github" target="_blank" href="https://github.com/michaelyshih/"></a></li>
-            <li><a class="fa-brands fa-linkedin" target="_blank" href="https://www.linkedin.com/in/michael-shih-7ba943244/"></a></li>
-        </ul>
-        <p class="heading">Every Top 3 Anime from 2018-2022</p>
-        <ul class="canvas nav">
-            <!-- <li id="pause">pause</li> -->
-            <li><a id="pause" style="display: none;">pause</a></li>
-            <li><a id="unpause" style="display: none;">unpause</a></li>
-            <li class="camera nav"><a id="anime">anime</a></li>
-            <li class="camera nav"><a id="manga">manga</a></li>
-            <li class="camera nav"><a id="songs">music</a></li>
-            <li><a id="home" style="display: none;">home</a></li>
-        </ul>
-    </nav>
+    <section class="nav-bar">
+        <nav class="heading-nav">
+            <p class="heading">Every Top 3 Anime from 2018-2022</p>
+        </nav>
+        <nav class="nav-bar-links">
+            <ul class="access">
+                <li><a class="fa-brands fa-facebook" target="_blank" href="https://www.facebook.com/michael.shih2"></a></li>
+                <li><a class="fa-brands fa-github" target="_blank" href="https://github.com/michaelyshih/"></a></li>
+                <li><a class="fa-brands fa-linkedin" target="_blank" href="https://www.linkedin.com/in/michael-shih-7ba943244/"></a></li>
+            </ul>
+            <ul class="canvas nav">
+                <!-- <li id="pause">pause</li> -->
+                <li><a id="pause" style="display: none;">pause</a></li>
+                <li><a id="unpause" style="display: none;">unpause</a></li>
+                <li class="camera nav"><a id="anime">anime</a></li>
+                <li class="camera nav"><a id="manga">manga</a></li>
+                <li class="camera nav"><a id="songs">music</a></li>
+                <li><a id="home" style="display: none;"><i class="fa-solid fa-house"></i></a></li>
+            </ul>
+        </nav>
+    </section>
     <main class="zoomed-in">
 
         <section class="zoomed-content">

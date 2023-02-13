@@ -27,17 +27,22 @@ body #loading-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+body #loading-page .loading-page-main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-size: 100px;
   font-weight: 700;
   font-family: cursive;
 }
-body #loading-page #loading-images {
+body #loading-page .loading-page-main-content #loading-images {
   display: flex;
   width: 100vw;
   justify-content: center;
 }
-body #loading-page #loading-images #loading-text {
+body #loading-page .loading-page-main-content #loading-images #loading-text {
   height: auto;
   width: auto;
   overflow: hidden;
@@ -46,56 +51,75 @@ body #loading-page #loading-images #loading-text {
   display: flex;
   align-items: center;
 }
-body #loading-page #loading-picture {
+body #loading-page .loading-page-main-content #loading-picture {
   height: 150px;
   width: 150px;
 }
-body #loading-page #enter-information {
+body #loading-page .loading-page-main-content #enter-information {
   display: flex;
   justify-content: start;
   align-items: flex-start;
   font-size: small;
 }
-body #loading-page #enter-information .info-container {
+body #loading-page .loading-page-main-content #enter-information .info-container {
   display: flex;
   align-items: center;
   flex-direction: column;
   margin: 20px;
   width: 115px;
 }
-body #loading-page #enter-information .mouse-container {
+body #loading-page .loading-page-main-content #enter-information .mouse-container {
   height: 75px;
   width: 50px;
   overflow: hidden;
 }
-body #loading-page #enter-information .mouse {
+body #loading-page .loading-page-main-content #enter-information .mouse {
   width: 300px;
   height: auto;
   position: relative;
   top: -15px;
   margin-left: -10px;
 }
-body #loading-page #enter-information #right-click {
+body #loading-page .loading-page-main-content #enter-information #right-click {
   margin-left: -8px;
 }
-body #loading-page #enter-information #scroll {
+body #loading-page .loading-page-main-content #enter-information #scroll {
   margin-left: -67px;
 }
-body #loading-page #enter-information #hover {
+body #loading-page .loading-page-main-content #enter-information #hover {
   margin-left: -240px;
 }
-body #loading-page #enter-information p {
+body #loading-page .loading-page-main-content #enter-information p {
   text-align: center;
 }
-body #loading-page #enter-button {
+body #loading-page .loading-page-main-content #enter-button {
   width: 100px;
   height: 75px;
   font-size: large;
   border-radius: 12px;
 }
-body #loading-page #enter-button:hover {
+body #loading-page .loading-page-main-content #enter-button:hover {
   background-color: gray;
   cursor: pointer;
+}
+body #loading-page .loading-page-footer {
+  justify-content: center;
+  align-items: end;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  font-size: 3rem;
+  bottom: 0;
+}
+body #loading-page .loading-page-footer > * {
+  padding: 10px;
+}
+body #loading-page .loading-page-footer a, body #loading-page .loading-page-footer a:hover, body #loading-page .loading-page-footer a:focus {
+  text-decoration: none;
+  cursor: pointer;
+  padding: 5px 10px;
 }
 body main {
   display: none;
@@ -117,6 +141,7 @@ body canvas {
 }
 
 .nav-bar {
+  height: 75px;
   margin: 10px 25px;
   display: flex;
   position: fixed;
@@ -126,26 +151,43 @@ body canvas {
   justify-content: space-between;
   align-items: center;
   z-index: 3;
+  color: #fff;
 }
-.nav-bar > * {
+
+.heading-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+.heading-nav p {
+  font-size: 35px;
+}
+
+.nav-bar-links {
+  margin: 10px 25px;
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+}
+.nav-bar-links > * {
   display: flex;
   justify-content: left;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.5);
   padding: 5px 7px;
   border-radius: 50%;
 }
-.nav-bar p {
-  font-weight: 400;
-  font-size: 24px;
-  padding: 6px 31px;
-}
-.nav-bar a, .nav-bar a:hover, .nav-bar a:focus {
+.nav-bar-links a, .nav-bar-links a:hover, .nav-bar-links a:focus {
   text-decoration: none;
   cursor: pointer;
+  font-size: 30px;
   padding: 5px 10px;
+  color: #fff;
 }
-.nav-bar #anime, .nav-bar #manga, .nav-bar #songs {
+.nav-bar-links #anime, .nav-bar-links #manga, .nav-bar-links #songs {
   animation: none;
 }
 @keyframes glow {
@@ -173,7 +215,7 @@ body canvas {
 }
 .zoomed-description h2 {
   margin-top: 0px;
-  font-size: 30px;
+  font-size: 40px;
   text-align: center;
   animation: glow 1s infinite alternate;
 }
@@ -186,22 +228,22 @@ body canvas {
   }
 }
 .zoomed-description p {
-  width: auto;
-  padding-left: 100px;
-  padding-right: 100px;
-  padding-bottom: 50px;
+  width: 70vw;
+  padding: 75px 50px 35px 50px;
   font-weight: bolder;
-  font-size: 22px;
+  font-size: 30px;
   white-space: pre-line;
   background-image: url(../data/torii-gate.gif);
   background-size: cover;
   background-color: rgb(192, 144, 144);
   background-blend-mode: color-burn;
+  -webkit-text-stroke-width: 0.6px;
+  -webkit-text-stroke-color: black;
 }
 
 .enter-descritpion p {
   width: auto;
-  font-size: 15px;
+  font-size: 25px;
   padding-left: 200px;
   padding-right: 200px;
   padding-bottom: 20px;

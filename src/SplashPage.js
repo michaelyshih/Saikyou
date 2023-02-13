@@ -13,7 +13,7 @@ export default class SplashPage{
         const loadingImages = document.getElementById("loading-images")
         const loadingText = document.getElementById("loading-text")
         loadingText.innerHTML = "Saikyou"
-        loadingPicture.setAttribute("src","https://i.gifer.com/2iFa.gif")
+        loadingPicture.setAttribute("src","data/cute-kitty-bow.gif")
         loadingImages.appendChild(loadingPicture)
         enterButton.innerHTML = "Welcome"
         // debugger
