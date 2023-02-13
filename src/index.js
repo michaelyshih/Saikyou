@@ -134,6 +134,7 @@ canvas.addEventListener("mousemove", throttle(function (event){
         const display = played.userData.id + "-display"
         const panelPlayed = document.getElementById(display);
 
+        // if the selected panel isn't currently playing
         if (!played.userData.playing){
             // panelPlayed.muted = true;
             panelPlayed.loop = true;
@@ -154,15 +155,25 @@ canvas.addEventListener("mousemove", throttle(function (event){
                 // put song into currently playing and change the background to the song
 
                 if (currentlyPlaying[0]) {
+                    // when trying to play a new song and something is currently in queue, paused or unpaused
+                    // when hovering and currently have something in queue,
+                    // change the playing status to false and pause the old playing
+                    //push in the new panel to be played
                     currentlyPlaying[0][1].userData.playing = false;
                     currentlyPlaying.shift()[0].pause()
                     currentlyPlaying.push([panelPlayed,played]);
+                    const unpause = document.getElementById("unpause");
+                    if (unpause) unpause.setAttribute("style","display:none");
+
                 }else {
                     currentlyPlaying.push([panelPlayed,played]);
                 };
                 viewer.scene.background = new THREE.VideoTexture(panelPlayed)
+                currentlyPlaying[0][1].userData.playing = true;
+                currentlyPlaying[0][0].play();
                 const pause = document.getElementById("pause");
                 pause.setAttribute("style","display:revert");
+
 
             }
         }
@@ -269,7 +280,7 @@ home.addEventListener("click",(e)=>{
     while (zoomedDescChildren[0]){
         zoomedDescChildren[0].parentNode.removeChild(zoomedDescChildren[0]);
     }
-    if (currentlyPlaying[0]) unpauseBackground();
+    // if (currentlyPlaying[0]) unpauseBackground();
     inZoom = false;
 })
 

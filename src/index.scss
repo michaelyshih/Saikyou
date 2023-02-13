@@ -177,6 +177,7 @@ body{
     align-items: center;
     z-index: 3;
     color: #fff;
+    font-family: cursive;
 }
 
 
@@ -312,10 +313,11 @@ body{
         white-space: pre-line;
         background-image: url(../data/torii-gate.gif);
         background-size: cover;
-        background-color: rgb(192, 144, 144);
-        background-blend-mode: color-burn;
-        -webkit-text-stroke-width: 0.6px;
+        background-color: rgb(202 168 168);
+        background-blend-mode: luminosity;
+        -webkit-text-stroke-width: 2px;
         -webkit-text-stroke-color: black;
+        font-family: cursive;
     }
 }
 
