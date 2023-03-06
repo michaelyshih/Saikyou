@@ -1,6 +1,6 @@
 # Saikyou
 
-[Live Site] (https://michaelyshih.github.io/Saikyou/)
+[Live Site](https://michaelyshih.github.io/Saikyou/)
 
 ## Objective: ##
 
