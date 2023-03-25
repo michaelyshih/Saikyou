@@ -29,6 +29,12 @@ body{
         flex-direction: column;
         justify-content: center;
 
+        .welcome-images{
+            display: flex;
+            justify-content: center;
+            width: fit-content;
+        }
+
         .loading-page-main-content{
             display: flex;
             flex-direction: column;
@@ -40,7 +46,6 @@ body{
 
             #loading-images{
                 display: flex;
-                width: 100vw;
                 justify-content: center;
 
                     #loading-text{
@@ -108,6 +113,7 @@ body{
                 width: 100px;
                 height: 75px;
                 font-size: large;
+                margin-top: 50px;
                 border-radius: 12px;
             }
 
@@ -120,6 +126,7 @@ body{
         .loading-page-footer{
             justify-content: center;
             align-items: end;
+            justify-content: end;
             width: 100%;
             display: flex;
             position: fixed;

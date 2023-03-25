@@ -28,6 +28,11 @@ body #loading-page {
   flex-direction: column;
   justify-content: center;
 }
+body #loading-page .welcome-images {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+}
 body #loading-page .loading-page-main-content {
   display: flex;
   flex-direction: column;
@@ -39,7 +44,6 @@ body #loading-page .loading-page-main-content {
 }
 body #loading-page .loading-page-main-content #loading-images {
   display: flex;
-  width: 100vw;
   justify-content: center;
 }
 body #loading-page .loading-page-main-content #loading-images #loading-text {
@@ -96,6 +100,7 @@ body #loading-page .loading-page-main-content #enter-button {
   width: 100px;
   height: 75px;
   font-size: large;
+  margin-top: 50px;
   border-radius: 12px;
 }
 body #loading-page .loading-page-main-content #enter-button:hover {
@@ -105,6 +110,7 @@ body #loading-page .loading-page-main-content #enter-button:hover {
 body #loading-page .loading-page-footer {
   justify-content: center;
   align-items: end;
+  justify-content: end;
   width: 100%;
   display: flex;
   position: fixed;
