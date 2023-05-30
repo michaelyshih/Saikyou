@@ -151,8 +151,7 @@ canvas.addEventListener("mousemove", throttle(function (event){
                     }
                 , 30000)
             } else {
-                // once it media starts playing and it's a song
-                // put song into currently playing and change the background to the song
+                // when playing, put song in background
 
                 if (currentlyPlaying[0]) {
                     // when trying to play a new song and something is currently in queue, paused or unpaused
