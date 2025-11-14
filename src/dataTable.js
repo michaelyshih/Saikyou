@@ -5,6 +5,7 @@ export default class DataTable{
         const datastring = new DataString();
         this.datastring = datastring.data;
     }
+    // Data Population based on panel ID
     addData(data_id){
         const currData = this.datastring[data_id]
         const zoomedContent = document.getElementsByClassName("zoomed-content")[0];

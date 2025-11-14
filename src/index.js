@@ -4,22 +4,6 @@ import Viewer from "./Viewer3D";
 import DataTable from './dataTable';
 import { LoadingManager } from 'three';
 import SplashPage from './SplashPage';
-// import Papa from "papaparse";
-// import fs from "fs";
-
-//csv-parser
-// let file = fs.createReadStream("./src/data/data.csv");
-// let csvData = [];
-// Papa.parse(file, {
-//   header: true,
-//   step: function(result) {
-//     csvData.push(result.data)
-//   },
-//   complete: function(results, file) {
-//     console.log('Complete', csvData.length, 'records.');
-//   }
-// });
-// console.log(csvData);
 
 //renderer
 const renderer = new THREE.WebGLRenderer({antialias: true}); // enabling anti-alias to soften corners
@@ -35,11 +19,9 @@ datatable.addPanelsData("a");
 datatable.addPanelsData("s");
 viewer.populate();
 
-//amibent lighting
-// const ambientLight = new THREE.AmbientLight(0xffffff,1.0);
-// viewer.scene.add(ambientLightColor);
+//Amibent lighting implement as necessary
 
-//camera
+//camera definition
 const aspect = window.innerWidth / window.innerHeight
 const camera = new THREE.PerspectiveCamera(
     75, // field of view
@@ -52,14 +34,12 @@ camera.lookAt(0,40,2000)
 //resizing
 // function resizeCanvasToDisplaySize() {
 window.addEventListener("resize",()=>{
-    // const canvas = renderer.domElement;
-    // look up the size the canvas is being displayed
+    // const canvas = renderer.domElement;\
     const width = window.innerWidth;
     const height = window.innerHeight;
 
     // adjust displayBuffer size to match
     // if (canvas.width !== width || canvas.height !== height) {
-    // you must pass false here or three.js sadly fights the browser
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
@@ -71,11 +51,12 @@ window.addEventListener("resize",()=>{
 
 //orbital controls
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.enableDamping = true; // add weight to the orbital camera panning
-controls.dampingFactor = 0.05; // damping factor
-controls.enablePan = false;
-
-// controls.enableRotate= false;
+Object.assign(controls, {
+  enableDamping: true,
+  dampingFactor: 0.05,
+  enablePan: false,
+//   enableRotate: false,
+});
 
 //shifting camera according to position
 const yearInput = document.getElementById("year");

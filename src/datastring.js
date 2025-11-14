@@ -3,6 +3,7 @@ export default class DataString{
     this.data = datastring;
   }
 }
+
 const datastring =
 {
   'a221':{

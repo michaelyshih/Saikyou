@@ -1,5 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 const config = {
   entry: [
@@ -35,7 +37,19 @@ const config = {
       fs: false
     }
   },
-  plugins: [new MiniCssExtractPlugin()]
+  plugins: [new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, 'src', 'index.html'),
+    filename: 'index.html'
+  })
+],
+  devServer: {
+    static: path.join(__dirname, 'dist'), // Serve the bundled files
+    port: 3000,                           // Change if needed
+    open: true,                           // Auto-open in browser
+    hot: true                             // Optional: hot reload
+  }
+
 };
 
 module.exports = (env, argv) => {
