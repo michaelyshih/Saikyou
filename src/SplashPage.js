@@ -3,6 +3,8 @@ export default class SplashPage{
     constructor(){
         const loadingPage = document.getElementById("loading-page");
         this.loadingPage= loadingPage;
+        this.removeFinishedPage = this.removeFinishedPage.bind(this);
+
     }
 
     addFinishedPage(){
@@ -25,7 +27,9 @@ export default class SplashPage{
 
     removeFinishedPage(){
         //removing the finishing page from parent node
+    if(this.loadingPage && this.loadingPage.parentNode){
         this.loadingPage.parentNode.removeChild(this.loadingPage);
+        }
     }
 
     addImages(){

@@ -41,10 +41,12 @@ const config = {
     new HtmlWebpackPlugin({
     template: path.resolve(__dirname, 'src', 'index.html'),
     filename: 'index.html'
-  })
-],
+  })],
   devServer: {
-    static: path.join(__dirname, 'dist'), // Serve the bundled files
+     static: [
+    path.join(__dirname, 'dist'),   // for compiled JS/CSS
+    path.join(__dirname)            // serve root for images
+    ],
     port: 3000,                           // Change if needed
     open: true,                           // Auto-open in browser
     hot: true                             // Optional: hot reload

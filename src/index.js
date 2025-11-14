@@ -32,6 +32,7 @@ camera.position.set(0,40,2100);  // set z axis of camera so that it's further aw
 camera.lookAt(0,40,2000)
 
 //resizing
+//  TODO: MODIFY RESIZE FOR BANNER TOO
 // function resizeCanvasToDisplaySize() {
 window.addEventListener("resize",()=>{
     // const canvas = renderer.domElement;\
@@ -44,9 +45,8 @@ window.addEventListener("resize",()=>{
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 
-      // update any render target sizes here
+    // update any render target sizes here
 })
-    // }
 //   }
 
 //orbital controls
@@ -60,13 +60,9 @@ Object.assign(controls, {
 
 //shifting camera according to position
 const yearInput = document.getElementById("year");
-// let pos1 = camera.position;
-// let pos2 = new THREE.Vector3(...viewer.currentTimeline.years["y2018"]);
-// // camera.set(newPos)
 let currentYear = viewer.currentTimeline.currentYear;
 yearInput.addEventListener("input", function(e){
     e.preventDefault();
-    // let pos1 = camera.position;
     const year = "y" + e.target.value;
     currentYear = year;
     viewer.currentTimeline.currentYear = year;
@@ -264,7 +260,7 @@ home.addEventListener("click",(e)=>{
     inZoom = false;
 })
 
-//reverse nav buttons
+//return nav buttons
 function changeButtons(){
     const homeButton = document.getElementById("home");
     const animeButton = document.getElementById("anime")
@@ -330,9 +326,6 @@ for (let video of videos){
 // waiting on canplaythrough
 const splash = new SplashPage();
 loadingManager.onLoad = function(){
-
     splash.addFinishedPage();
-    // loadingpage.setAttribute("style","display:none;");
-    // debugger
     update();
 }
