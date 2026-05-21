@@ -1,16 +1,9 @@
 import * as THREE from 'three';
 import './index.scss';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
 import DataTable from './dataTable';
-import { LoadingManager } from 'three';
 import SplashPage from './SplashPage';
-
-//renderer
-const renderer = new THREE.WebGLRenderer({antialias: true}); // enabling anti-alias to soften corners
-renderer.setSize( window.innerWidth, window.innerHeight ); // setting renderer size to be window
-renderer.shadowMap.enabled = true; // allows for shadow when redering
-document.body.appendChild( renderer.domElement ); // at the rendered canvas as a child of the body
+import { renderer, camera, controls, raycaster, pointer, onPointerMove} from './renderer';
 
 //scene
 const viewer = new Viewer();
@@ -20,44 +13,18 @@ datatable.addPanelsData("a");
 datatable.addPanelsData("s");
 viewer.populate();
 
-//Amibent lighting implement as necessary
-
-//camera definition
-const aspect = window.innerWidth / window.innerHeight
-const camera = new THREE.PerspectiveCamera(
-    75, // field of view
-    aspect, // aspect ratio
-    0.1, // near clipping range
-    2000); // far clipping range
-camera.position.set(0,40,2100);  // set z axis of camera so that it's further away
-camera.lookAt(0,40,2000)
 
 //resizing
 //  TODO: MODIFY RESIZE FOR BANNER TOO
-// function resizeCanvasToDisplaySize() {
+// function resizeCanvasToDisplaySize() {}
 window.addEventListener("resize",()=>{
-    // const canvas = renderer.domElement;\
     const width = window.innerWidth;
     const height = window.innerHeight;
-
-    // adjust displayBuffer size to match
-    // if (canvas.width !== width || canvas.height !== height) {
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-
-    // update any render target sizes here
 })
-//   }
 
-//orbital controls
-const controls = new OrbitControls( camera, renderer.domElement );
-Object.assign(controls, {
-  enableDamping: true,
-  dampingFactor: 0.05,
-  enablePan: false,
-//   enableRotate: false,
-});
 
 //shifting camera according to position
 const yearInput = document.getElementById("year");
@@ -86,21 +53,12 @@ function updateCamera(year){
 // const pointLight = new THREE.PointLight(0xffffff,50); // setting a point light with intesity of 1, color of white
 // camera.add(pointLight);
 
-// raycasting for object interaction
-const raycaster = new THREE.Raycaster();
-const pointer = new THREE.Vector2(); // setting a two dimensinal vector for the location of pointer relative to screen
-const canvas = document.querySelector("canvas");
-function onPointermMove(event){
-    //setting the pointer position relative to the scaling of width and height of screen
-	pointer.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	pointer.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-}
-
 //play on hover
 let currentlyPlaying = [];
+const canvas = renderer.domElement;
 
 canvas.addEventListener("mousemove", throttle(function (event){
-    onPointermMove(event); // sets the pointe location as the mouse's event location
+    onPointerMove(event); // sets the pointe location as the mouse's event location
 
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
 
@@ -164,7 +122,7 @@ let panelClicked;
 let inZoom;
 
 canvas.addEventListener("mousedown", event=>{
-    onPointermMove(event); // sets the points location as the mouse's event location
+    onPointerMove(event); // sets the points location as the mouse's event location
     raycaster.setFromCamera( pointer, camera ); // setting the pointer x,y on the camera **might have to change when dealing with multiple camera
     const intersects = raycaster.intersectObjects( viewer.scene.children ); //returns all the objs in scene that intersect with the pointer
 
