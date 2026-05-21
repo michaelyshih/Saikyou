@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import './index.scss';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import Viewer from "./Viewer3D";
 import DataTable from './dataTable';
