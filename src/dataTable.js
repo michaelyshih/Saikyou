@@ -16,7 +16,7 @@ export default class DataTable{
             content.setAttribute("height","500");
             content.setAttribute("src",`${currData.mat_url}`);
             content.setAttribute("frameborder","0");
-            content.setAttribute("allow","accelerometer; preload; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen");
+            content.setAttribute("allow","accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen");
             zoomedContent.appendChild(content);
         } else if (data_id[0] === "a" || data_id[0] === "s"){
             const largelink = document.createElement("A");
@@ -83,7 +83,6 @@ export default class DataTable{
                     imagePanel.setAttribute("style","display: none;")
                     imagePanel.setAttribute("type","video/mp4")
                     imagePanel.setAttribute("loop","")
-                    imagePanel.setAttribute("preload","")
                     imagePanel.setAttribute("src",`data/${panel_ID}.mp4`)
                     document.body.appendChild(imagePanel)
                 }
